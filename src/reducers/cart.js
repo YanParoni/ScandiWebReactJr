@@ -4,7 +4,8 @@ import { PRODUCTS,
   REMOVE_FROM_CART,
   ADJUST_ITEM_QTY,
 LOAD_CURRENT_ITEM,
-SEND_CATEGORY
+SEND_CATEGORY,
+SEND_CURRENCY
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -13,7 +14,8 @@ cart:[],
 input: '',
 category:'',
 currentItem: [],
-index:0
+index:0,
+currency:0
 };
 
 function cart(state = INITIAL_STATE, action) {
@@ -28,11 +30,9 @@ switch (action.type) {
         input: action.state 
       }
       case ADD_TO_CART:
-    // Great Item data from products array
     const item = state.products.find(
       (product) => product.productId === action.payload.productId
     );
-    // Check if Item is in cart already
     const inCart = state.cart.find((item) =>
       item.productId === action.payload.productId ? true : false
     );
@@ -71,6 +71,11 @@ switch (action.type) {
         ...state,
         category:action.state
       }
+      case SEND_CURRENCY:
+        return {
+          ...state,
+          currency:action.state
+        }
   default:
     return state;
 }

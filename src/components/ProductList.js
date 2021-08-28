@@ -10,9 +10,8 @@ class ProductList extends Component {
     }
   }
 
-  
-
   render() {
+    const { currency} = this.props
     return (
       <div>
         {this.props.produc &&
@@ -21,7 +20,7 @@ class ProductList extends Component {
                 {' '}
                 <div>{name}</div>
                 <img width='150px' src={gallery[0]} />
-                <div>{prices[0].amount}</div>
+                <div>{prices[currency].amount}</div>
               </div>
             ))}
       </div>
@@ -30,6 +29,7 @@ class ProductList extends Component {
 }
 const mapStateToProps = (state) => ({
   produc: state.cart.products,
+  currency: state.cart.currency,
 });
 
 export default connect(mapStateToProps)(ProductList)

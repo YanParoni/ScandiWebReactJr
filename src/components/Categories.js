@@ -91,6 +91,7 @@ class Categories extends Component {
     );
   }
 }
+
 const mapDispatchToProps = (dispatch) => ({
   sendCategory: (state) => dispatch(sendCategory(state)),
   sendProducts: (state) => dispatch(sendProducts(state)),
