@@ -12,6 +12,7 @@ const arr = [
   '/imgs/iene.png',
   '/imgs/rublo.png',
 ];
+
 class Currency extends Component {
   constructor() {
     super();
@@ -24,17 +25,17 @@ class Currency extends Component {
 
   handleClick = () => {
     if (!this.state.showModal) {
-      document.addEventListener("click", this.handleOutsideClick, false);
+      document.addEventListener('click', this.handleOutsideClick, false);
     } else {
-      document.removeEventListener("click", this.handleOutsideClick, false);
+      document.removeEventListener('click', this.handleOutsideClick, false);
     }
 
-    this.setState(prevState => ({
-      showModal: !prevState.showModal
+    this.setState((prevState) => ({
+      showModal: !prevState.showModal,
     }));
   };
 
-  handleOutsideClick = e => {
+  handleOutsideClick = (e) => {
     if (!this.node.contains(e.target)) this.handleClick();
   };
 
@@ -50,24 +51,24 @@ class Currency extends Component {
     this.setState({ currencies: result.data.currencies });
   }
 
-
   render() {
-    const { sendCurrency,selected } = this.props;
+    const { sendCurrency, selected } = this.props;
     return (
       <div
-        ref={node => {
+        ref={(node) => {
           this.node = node;
         }}
       >
         <button onClick={this.handleClick}>
-        <img width="30px" src={arr[selected]}/>
+          <img width="30px" src={arr[selected]} />
+          {this.state.showModal ? <span>V</span> : <span>/\</span>}
         </button>
         {this.state.currencies &&
           this.state.showModal &&
           this.state.currencies.map((item, id) => (
             <button onClick={() => sendCurrency(id)} key={id}>
-              {item}
               <img width="30px" src={arr[id]}></img>
+              <span> {item}</span>
             </button>
           ))}
       </div>
