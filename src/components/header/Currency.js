@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { getCurrencies } from '../Graphql/queries';
-import client from '../Graphql/apolloClient';
+import { getCurrencies } from '../../Graphql/queries';
+import client from '../../Graphql/apolloClient';
 import { connect } from 'react-redux';
-import { sendCurrency } from '../actions';
-import { CurrencyOverlay } from '../styles';
+import { sendCurrency } from '../../actions';
+import { CurrencySelect } from './styles/style-nav';
 
 const arr = [
   '/imgs/dollar.png',
@@ -54,24 +54,24 @@ class Currency extends Component {
   render() {
     const { sendCurrency, selected } = this.props;
     return (
-      <div
+      <CurrencySelect
         ref={(node) => {
           this.node = node;
         }}
       >
-        <button onClick={this.handleClick}>
+        <span onClick={this.handleClick}>
           <img width="30px" src={arr[selected]} />
           {this.state.showModal ? <span>V</span> : <span>/\</span>}
-        </button>
+        </span>
         {this.state.currencies &&
           this.state.showModal &&
           this.state.currencies.map((item, id) => (
-            <button onClick={() => sendCurrency(id)} key={id}>
-              <img width="30px" src={arr[id]}></img>
-              <span> {item}</span>
-            </button>
+            <span id='options'onClick={() => sendCurrency(id)} key={id}>
+            <span> {item}</span>
+              <img width="30px" src={arr[id]}/>
+            </span>
           ))}
-      </div>
+      </CurrencySelect>
     );
   }
 }

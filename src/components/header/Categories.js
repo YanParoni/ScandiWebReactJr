@@ -3,10 +3,11 @@ import {
   getAllProducts,
   getCategories,
   getItemsByCategory,
-} from '../Graphql/queries';
-import client from '../Graphql/apolloClient';
+} from '../../Graphql/queries';
+import client from '../../Graphql/apolloClient';
 import { connect } from 'react-redux';
-import { sendCategory, sendProducts } from '../actions';
+import { sendCategory, sendProducts } from '../../actions';
+import { Container, Item, buttonCat } from "./styles/style-categories";
 
 class Categories extends Component {
   constructor() {
@@ -65,17 +66,17 @@ class Categories extends Component {
   render() {
     const { sendCategory } = this.props;
     return (
-      <div>
-        <button
+      <Container>
+        <buttonCat
           onClick={() => this.setState({ category: '' })}
           type="submit"
           value="all"
         >
-          All
-        </button>
+          <Item>All</Item>
+        </buttonCat>
         {this.state.categories &&
           this.state.categories.map(({ name }, id) => (
-            <button
+            <buttonCat
               key={id}
               type="submit"
               onClick={() => {
@@ -84,10 +85,10 @@ class Categories extends Component {
               }}
               value={name}
             >
-              {name}
-            </button>
+              <Item>{name}</Item>
+            </buttonCat>
           ))}
-      </div>
+      </Container>
     );
   }
 }

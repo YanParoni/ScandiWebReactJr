@@ -31,23 +31,35 @@ export const getItems = gql`
 
 export const getAllProducts = gql`
 query {
-  category{
-    name
-    products {
-      id
+    category{
       name
-      gallery
-      inStock
-      description
-      category
-      prices {
-        currency
-        amount
+      products {
+      name
+     gallery
+     inStock
+     prices {
+         currency
+         amount
+     }
+       attributes{
+        id
+        name
+          type
+        items {
+          value
+          displayValue
+          id
+        }
+        items {
+          displayValue
+          value
+          id
+        }
       }
-      brand
+        brand
+      }
     }
-  }
-}`
+  }`
 
 export const getItemsByCategory = gql`
     query getItemsByCategory($title: String!) {
