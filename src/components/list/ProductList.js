@@ -39,9 +39,6 @@ class ProductList extends Component {
           this.props.produc.map((item, id) => (
             <>
             <ProductCard item={item} id={id} prices={item.prices[currentCurr].currency} amount={item.prices[currentCurr].amount}  />
-            {console.log(this.props.currentCurr)}
-            {console.log(item.prices)}
-
           </>
           ))}
       </ProductsContainer>

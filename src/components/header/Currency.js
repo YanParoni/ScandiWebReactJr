@@ -4,6 +4,7 @@ import client from '../../Graphql/apolloClient';
 import { connect } from 'react-redux';
 import { sendCurrency } from '../../actions';
 import { CurrencySelect } from './styles/style-nav';
+import { CurrencyItem} from './styles/style-currency';
 
 const arr = [
   '/imgs/dollar.png',
@@ -21,27 +22,29 @@ class Currency extends Component {
       currencies: [],
       showModal: false,
     };
+    this.toggleModal =  this.toggleModal.bind(this);
   }
 
-  handleClick = () => {
-    if (!this.state.showModal) {
-      document.addEventListener('click', this.handleOutsideClick, false);
-    } else {
-      document.removeEventListener('click', this.handleOutsideClick, false);
-    }
-
-    this.setState((prevState) => ({
-      showModal: !prevState.showModal,
-    }));
-  };
-
+  
+  
   handleOutsideClick = (e) => {
-    if (!this.node.contains(e.target)) this.handleClick();
+    if (!this.node.contains(e.target)) this.setState({ showOptions: false });
+
   };
 
   componentDidMount() {
     this.fetchCurrency();
+    document.addEventListener("click", this.handleOutsideClick);
   }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleOutsideClick);
+}
+
+   toggleModal() {
+    this.setState((prevState) => ({
+      showModal: !prevState.showModal,
+    }));   }
 
   async fetchCurrency() {
     const result = await client.query({
@@ -49,6 +52,7 @@ class Currency extends Component {
     });
     console.log(result);
     this.setState({ currencies: result.data.currencies });
+    document.addEventListener("click", this.handleOutsideClick);
   }
 
   render() {
@@ -58,19 +62,23 @@ class Currency extends Component {
         ref={(node) => {
           this.node = node;
         }}
+        onClick={this.toggleModal}
+        active={this.state.showOptions}
       >
-        <span onClick={this.handleClick}>
-          <img width="30px" src={arr[selected]} />
+          <span  >
+          <img width="30px" src={arr[selected]}/>
+          </span>
+          <div id='options'>
           {this.state.showModal ? <span>V</span> : <span>/\</span>}
-        </span>
-        {this.state.currencies &&
+        {
           this.state.showModal &&
           this.state.currencies.map((item, id) => (
-            <span id='options'onClick={() => sendCurrency(id)} key={id}>
-            <span> {item}</span>
-              <img width="30px" src={arr[id]}/>
+            <span onClick={() => sendCurrency(id)} key={id}>
+              <img src={arr[id]}/>
+              {item}
             </span>
           ))}
+          </div>
       </CurrencySelect>
     );
   }
