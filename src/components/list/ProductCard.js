@@ -32,7 +32,7 @@ mouseOff() {
 
   render() {
     const {item} = this.props;
-    const {prices,amount} =this.props
+    const {prices,amount,id} =this.props
     return (
      <>
      <ItemContainer
@@ -41,7 +41,7 @@ mouseOff() {
               key={item.id}
             >
               <ItemTop>
-                <StyledLink to={`/product/${item.id}`}>
+                <StyledLink to={`/product/${id}`}>
                   <ProductImageContainer>
                     <ProductImage width="150px" src={item.gallery[0]}></ProductImage>
                   </ProductImageContainer>
