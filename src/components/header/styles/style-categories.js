@@ -14,9 +14,7 @@ export const Container = styled.div`
   &.active {
         color: #5ECE7B;
         box-shadow: inset 0 -2px 0 0 #5ECE7B; 
-
     }  
-
 `;
 
 export const buttonCat = styled.button`

@@ -9,7 +9,6 @@ export default class Home extends Component {
       <div>
         <Navbar/>
         <CartCurr/>
-        <span>cu</span>
         <ProductList/>
       </div>
     )

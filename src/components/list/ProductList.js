@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BtnCart from './BtnCart';
 import {
@@ -14,39 +13,36 @@ import {
   OutOfStockText,
   ItemTop,
 } from './list-style';
+import ProductCard from './ProductCard';
 
 class ProductList extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { hover: false };
+    this.mouseOn = this.mouseOn.bind(this);
+    this.mouseOff = this.mouseOff.bind(this);
+  }
+
+  mouseOn() {
+    this.setState({ hover: true });
+  }
+
+  mouseOff() {
+    this.setState({ hover: false });
   }
 
   render() {
-    const { currency } = this.props;
-    console.log(this.props.produc.inStock);
-    return (
+    const {currentCurr} = this.props;
+ return (
       <ProductsContainer>
         {this.props.produc &&
-          this.props.produc.map(({ name, gallery, prices, inStock }, id) => (
-            <ItemContainer key={id}>
-              <ItemTop>
-                <StyledLink to={`/product/${id}`}>
-                  <ProductImageContainer>
-                    <ProductImage width="150px" src={gallery[0]}></ProductImage>
-                  </ProductImageContainer>
-                  {!inStock && (
-                    <OutOfStockOverlay>
-                      <OutOfStockText>out of stock</OutOfStockText>
-                    </OutOfStockOverlay>
-                  )}{' '}
-                 {  inStock && <BtnCart/>
-                 }
-                </StyledLink>
-              </ItemTop>
+          this.props.produc.map((item, id) => (
+            <>
+            <ProductCard item={item} prices={item.prices[currentCurr].currency} amount={item.prices[currentCurr].amount}  />
+            {console.log(this.props.currentCurr)}
+            {console.log(item.prices)}
 
-              <ItemName>{name}</ItemName>
-              <ItemPrice>{prices[currency].amount}</ItemPrice>
-            </ItemContainer>
+          </>
           ))}
       </ProductsContainer>
     );
@@ -54,7 +50,7 @@ class ProductList extends Component {
 }
 const mapStateToProps = (state) => ({
   produc: state.cart.products,
-  currency: state.cart.currency,
+  currentCurr: state.cart.currency,
 });
 
 export default connect(mapStateToProps)(ProductList);
