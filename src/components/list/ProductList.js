@@ -1,18 +1,7 @@
+import { valueToObjectRepresentation } from '@apollo/client/utilities';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import BtnCart from './BtnCart';
-import {
-  ProductImage,
-  ProductsContainer,
-  ProductImageContainer,
-  ItemName,
-  ItemPrice,
-  StyledLink,
-  ItemContainer,
-  OutOfStockOverlay,
-  OutOfStockText,
-  ItemTop,
-} from './list-style';
+import { ProductsContainer,Title } from './list-style';
 import ProductCard from './ProductCard';
 
 class ProductList extends Component {
@@ -32,22 +21,31 @@ class ProductList extends Component {
   }
 
   render() {
-    const {currentCurr} = this.props;
- return (
-      <ProductsContainer>
-        {this.props.produc &&
-          this.props.produc.map((item, id) => (
-            <>
-            <ProductCard item={item} id={id} prices={item.prices[currentCurr].currency} amount={item.prices[currentCurr].amount}  />
-          </>
-          ))}
-      </ProductsContainer>
+    const { currentCurr } = this.props;
+    return (
+      <>
+        <Title>{this.props.category.toUpperCase()}</Title>
+        <ProductsContainer>
+          {this.props.produc &&
+            this.props.produc.map((item, id) => (
+              <>
+                <ProductCard
+                  item={item}
+                  id={id}
+                  prices={item.prices[currentCurr].currency}
+                  amount={item.prices[currentCurr].amount}
+                />
+              </>
+            ))}
+        </ProductsContainer>
+      </>
     );
   }
 }
 const mapStateToProps = (state) => ({
   produc: state.cart.products,
   currentCurr: state.cart.currency,
+  category: state.cart.category,
 });
 
 export default connect(mapStateToProps)(ProductList);

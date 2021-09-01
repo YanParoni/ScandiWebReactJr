@@ -3,16 +3,11 @@ import { getCurrencies } from '../../Graphql/queries';
 import client from '../../Graphql/apolloClient';
 import { connect } from 'react-redux';
 import { sendCurrency } from '../../actions';
-import { CurrencySelect } from './styles/style-nav';
-import { CurrencyItem} from './styles/style-currency';
+import { CurrencySelect,CurrencyIn } from './styles/style-nav';
+import getSymbolFromCurrency from 'currency-symbol-map';
+import { ReactComponent as DownArrow } from './svg/down.svg';
+import { ReactComponent as UpArrow } from './svg/up.svg';
 
-const arr = [
-  '/imgs/dollar.png',
-  '/imgs/libra.png',
-  '/imgs/aus-dollar.png',
-  '/imgs/iene.png',
-  '/imgs/rublo.png',
-];
 
 class Currency extends Component {
   constructor() {
@@ -22,37 +17,37 @@ class Currency extends Component {
       currencies: [],
       showModal: false,
     };
-    this.toggleModal =  this.toggleModal.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  
-  
   handleOutsideClick = (e) => {
-    if (!this.node.contains(e.target)) this.setState({ showOptions: false });
-
+    if (this.node.contains(e.target)) {
+      this.setState({ showOptions: false });
+    }
   };
 
   componentDidMount() {
     this.fetchCurrency();
-    document.addEventListener("click", this.handleOutsideClick);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleOutsideClick);
-}
+    document.removeEventListener('click', this.handleOutsideClick);
+  }
 
-   toggleModal() {
+  toggleModal() {
     this.setState((prevState) => ({
       showModal: !prevState.showModal,
-    }));   }
+    }));
+  }
 
   async fetchCurrency() {
     const result = await client.query({
       query: getCurrencies,
     });
     console.log(result);
+    document.addEventListener('click', this.handleOutsideClick);
     this.setState({ currencies: result.data.currencies });
-    document.addEventListener("click", this.handleOutsideClick);
   }
 
   render() {
@@ -65,20 +60,17 @@ class Currency extends Component {
         onClick={this.toggleModal}
         active={this.state.showOptions}
       >
-          <span  >
-          <img width="30px" src={arr[selected]}/>
-          </span>
-          <div id='options'>
-          {this.state.showModal ? <span>V</span> : <span>/\</span>}
-        {
-          this.state.showModal &&
-          this.state.currencies.map((item, id) => (
-            <span onClick={() => sendCurrency(id)} key={id}>
-              <img src={arr[id]}/>
-              {item}
-            </span>
-          ))}
-          </div>
+       <CurrencyIn> {`${getSymbolFromCurrency(this.state.currencies[selected])}`} 
+        {this.state.showModal ? <DownArrow/> : <UpArrow/>}
+</CurrencyIn>
+        <div id="options">
+          {this.state.showModal &&
+            this.state.currencies.map((item, id) => (
+              <CurrencyIn onClick={() => sendCurrency(id)} key={id}>
+                {`${getSymbolFromCurrency(item)} ${item}`}
+              </CurrencyIn>
+            ))}
+        </div>
       </CurrencySelect>
     );
   }

@@ -8,7 +8,6 @@ export default class Home extends Component {
     return (
       <div>
         <Navbar/>
-        <CartCurr/>
         <ProductList/>
       </div>
     )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CartCurr from './CartCurr'
 import Categories from './Categories'
 import { HeaderContainer, NavContainer } from './styles/style-nav'
 
@@ -8,6 +9,7 @@ export default class Navbar extends Component {
       <HeaderContainer>
       <NavContainer>
      <Categories/>
+     <CartCurr/>
      </NavContainer>
      </HeaderContainer>
     )

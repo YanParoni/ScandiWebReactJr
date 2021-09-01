@@ -13,7 +13,4 @@ export const CurrencyItem = styled.div`
         span {
             display: inline;
         }
-        img {
-          display:inline;
-        }
 `;

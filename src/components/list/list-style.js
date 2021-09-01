@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const ProductsContainer = styled.div`
   display: relative;
   display: grid;
-  margin-top: 200px;
+  margin-top: 90px;
   grid-auto-flow: row dense;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr 1fr;
@@ -111,6 +111,7 @@ export const AddToCartButton = styled.div`
     width: 24px;
     height: 24px;
     fill: white;
+
   }
   border-radius: 100%;
   padding: 10px;
@@ -119,12 +120,25 @@ export const AddToCartButton = styled.div`
   position: absolute;
   top: calc(100% - 26px);
   left: 80%;
-  transition: all 0.2s ease;
+
   &:hover {
     transform: scale(1.2, 1.2);
+    transition: all 0.5s ease;
+
   }
   &:active {
     transform: scale(0.9, 0.9);
   }
   cursor: pointer;
 `;
+
+export const Title = styled.span`
+width: 299px;
+height: 68px;
+margin:101px;
+bottom:50px;
+font-family: Raleway;
+font-style: normal;
+font-weight: normal;
+font-size: 42px;
+color: #1D1F22;`

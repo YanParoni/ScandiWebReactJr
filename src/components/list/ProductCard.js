@@ -12,6 +12,7 @@ import {
   OutOfStockText,
   ItemTop,
 } from './list-style';
+import getSymbolFromCurrency from 'currency-symbol-map';
 
 
 export default class ProductCard extends Component {
@@ -56,7 +57,7 @@ mouseOff() {
                 )}
               </ItemTop>
               <ItemName>{item.name}</ItemName>
-              <ItemPrice>{prices}</ItemPrice>
+              <ItemPrice>{`${getSymbolFromCurrency(prices)}`}</ItemPrice>
               <ItemPrice>{amount}</ItemPrice>
             </ItemContainer>
      </>
