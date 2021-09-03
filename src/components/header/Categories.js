@@ -72,6 +72,7 @@ class Categories extends Component {
           type="submit"
           value="all"
         >
+        
           <Item>All</Item>
         </buttonCat>
         {this.state.categories &&

@@ -135,7 +135,7 @@ export const AddToCartButton = styled.div`
 export const Title = styled.span`
 width: 299px;
 height: 68px;
-margin:101px;
+margin:103px;
 bottom:50px;
 font-family: Raleway;
 font-style: normal;

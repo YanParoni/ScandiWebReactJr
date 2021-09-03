@@ -60,15 +60,15 @@ class Currency extends Component {
         onClick={this.toggleModal}
         active={this.state.showOptions}
       >
-       <CurrencyIn> {`${getSymbolFromCurrency(this.state.currencies[selected])}`} 
+       <span> {`${getSymbolFromCurrency(this.state.currencies[selected])}`} 
         {this.state.showModal ? <DownArrow/> : <UpArrow/>}
-</CurrencyIn>
+        </span>
         <div id="options">
           {this.state.showModal &&
             this.state.currencies.map((item, id) => (
-              <CurrencyIn onClick={() => sendCurrency(id)} key={id}>
+              <span onClick={() => sendCurrency(id)} key={id}>
                 {`${getSymbolFromCurrency(item)} ${item}`}
-              </CurrencyIn>
+              </span>
             ))}
         </div>
       </CurrencySelect>

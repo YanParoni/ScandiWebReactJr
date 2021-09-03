@@ -16,7 +16,7 @@ width: 1440px;
 height: 80px;
 left: 0px;
 top: 0px;
-
+margin-bottom:80px;
 `;
 
 export const CurrencySelect = styled.div`
@@ -40,6 +40,11 @@ export const CurrencySelect = styled.div`
         gap: 10px;
         position: absolute;
         top: 50px;}
+        svg{
+          width:10px;
+          height:10px;
+          margin-left:10px;
+        }
         span {
             display: block;
            
