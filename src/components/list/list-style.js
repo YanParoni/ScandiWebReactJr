@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const ProductsContainer = styled.div`
   display: relative;
@@ -111,7 +111,6 @@ export const AddToCartButton = styled.div`
     width: 24px;
     height: 24px;
     fill: white;
-
   }
   border-radius: 100%;
   padding: 10px;
@@ -124,7 +123,6 @@ export const AddToCartButton = styled.div`
   &:hover {
     transform: scale(1.2, 1.2);
     transition: all 0.5s ease;
-
   }
   &:active {
     transform: scale(0.9, 0.9);
@@ -133,12 +131,14 @@ export const AddToCartButton = styled.div`
 `;
 
 export const Title = styled.span`
-width: 299px;
-height: 68px;
-margin:103px;
-bottom:50px;
-font-family: Raleway;
-font-style: normal;
-font-weight: normal;
-font-size: 42px;
-color: #1D1F22;`
+  width: 299px;
+  height: 68px;
+  margin: 103px;
+  bottom: 50px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 42px;
+  color: #1d1f22;
+`;
+

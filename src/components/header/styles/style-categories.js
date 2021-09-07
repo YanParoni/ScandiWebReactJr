@@ -17,7 +17,7 @@ export const Container = styled.div`
     }  
 `;
 
-export const buttonCat = styled.button`
+export const BttonCat = styled.button`
      padding: 4px 1vw 32px 1vw;
     height: 56px;
     display: flex;
@@ -28,7 +28,8 @@ export const buttonCat = styled.button`
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
-  
+    background: transparent;
+    border: none !important;
 `;
 export const Item = styled.div`
   padding: 4px 1vw 32px 1vw;

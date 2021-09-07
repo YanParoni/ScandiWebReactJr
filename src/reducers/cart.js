@@ -30,22 +30,10 @@ switch (action.type) {
         input: action.state 
       }
       case ADD_TO_CART:
-    const item = state.products.find(
-      (product) => product.productId === action.payload.productId
-    );
-    const inCart = state.cart.find((item) =>
-      item.productId === action.payload.productId ? true : false
-    );
-    return {
-      ...state,
-      cart: inCart
-        ? state.cart.map((item) =>
-            item.productId === action.payload.productId && item.amount < item.available
-              ? { ...item, amount: item.amount + 1 }
-              : item
-          )
-        : [...state.cart, { ...item, amount: 1 }],
-    };
+   return {
+     ...state,
+     cart:[...state.cart,action.state]
+   }
   case REMOVE_FROM_CART:
     return {
       ...state,

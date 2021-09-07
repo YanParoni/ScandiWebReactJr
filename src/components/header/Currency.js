@@ -3,7 +3,7 @@ import { getCurrencies } from '../../Graphql/queries';
 import client from '../../Graphql/apolloClient';
 import { connect } from 'react-redux';
 import { sendCurrency } from '../../actions';
-import { CurrencySelect,CurrencyIn } from './styles/style-nav';
+import { CurrencySelect } from './styles/style-nav';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { ReactComponent as DownArrow } from './svg/down.svg';
 import { ReactComponent as UpArrow } from './svg/up.svg';

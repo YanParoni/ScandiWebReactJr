@@ -31,12 +31,10 @@ export const searchInput = (state) => ({
   state,
 });
 
-export const addToCart = (itemID) => {
+export const addToCart = (state) => {
   return {
     type: ADD_TO_CART,
-    payload: {
-      productId: itemID,
-    },
+    state,
   };
 };
 
