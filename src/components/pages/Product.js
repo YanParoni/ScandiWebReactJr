@@ -29,6 +29,8 @@ class Product extends Component {
     this.saveAttribute = this.saveAttribute.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.makeActive = this.makeActive.bind(this);
+    this.findEqual = this.findEqual.bind(this);
+
     this.state = {
       item: {},
       chosenImage: this.props.product.gallery[0],
@@ -91,6 +93,18 @@ class Product extends Component {
     }
   }
 
+  findEqual(){
+    const {cart} = this.props;
+    const {savedAttributes} = this.state
+    const cartAtt = cart.map(item=>item.savedAttribute).map((item,id)=>item)
+    const flatCartAtt = cartAtt.flat(Infinity)
+    const savedAtt=savedAttributes.map(item=>item.item.value)
+    const [itemInCart] = savedAtt
+    console.log(itemInCart)
+    const inCart = flatCartAtt.map(item=>item.item.value).some(item=>item===itemInCart)
+    console.log(inCart)
+  }
+
   render() {
     const { savedAttributes } = this.state;
     const { currency, product } = this.props;
@@ -126,7 +140,8 @@ class Product extends Component {
                   )}
                 </ProductPrice>
                 <Button
-                  onClick={this.handleAddToCart}
+                  onClick={()=>{this.handleAddToCart();
+                  this.findEqual()}}
                   inStock={product.inStock}
                 >
                   {product.inStock ? "add to cart" : "out of stock"}
@@ -148,6 +163,7 @@ class Product extends Component {
 const mapStateToProps = (state) => ({
   product: state.cart.currentItem,
   currency: state.cart.currency,
+  cart: state.cart.cart,
 });
 
 const mapDispatchToProps = (dispatch) => ({
