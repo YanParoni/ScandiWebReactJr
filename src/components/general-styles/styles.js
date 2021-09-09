@@ -17,6 +17,10 @@ export const AttributeGroup = styled.div`
     gap: 0.833vw;
     margin-bottom: 8px;
 `;
+export const DetailsContainer = styled.div`
+    display: flex;
+    flex-direction:column
+`;
 
 export const AttributeButton = styled.button`
     background-color: ${(props) => !props.inStock || !props.active ? "#fff" : "#1D1F22"};
@@ -59,9 +63,6 @@ export const Button = styled.button`
 `;
 
 export const ProductName = styled.h1`
-    &::first-line {
-        font-weight: 600;
-    }
     font-weight: 400;
     font-size: 30px;
     line-height: 27px;
@@ -70,12 +71,55 @@ export const ProductName = styled.h1`
 `;
 
 export const ProductBrand = styled.h1`
-    &::first-line {
-        font-weight: 600;
-    }
     font-family:Raleway;
     font-weight: 600;
     font-size: 30px;
     line-height: 27px;
     margin-bottom: 43px;
+`;
+
+export const ProductPriceLabel = styled.span`
+    margin-top: 40px;
+    display: block;
+    width: 3.472vw;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    text-transform: uppercase;
+`;
+
+export const ProductPrice = styled.span`
+    display: block;
+    width: auto;
+    font-weight: 700;
+    
+    margin: 10px 0 20px 0;
+    height: 46px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Roboto Condensed",sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 18px;
+`;
+
+export const ProductImage = styled.img`
+    width: 42.361vw;
+    height: 35vw;
+    object-fit: contain;
+`;
+
+export const ProductContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 2.778vw;
+    margin: 106px 15.278vw 72px 8.333vw;
+    width: 100%;
+`;
+
+export const Description = styled.div`
+    font-family:Roboto;
 `;

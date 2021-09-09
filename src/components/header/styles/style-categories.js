@@ -18,8 +18,6 @@ export const Container = styled.div`
 `;
 
 export const BttonCat = styled.button`
-     padding: 4px 1vw 32px 1vw;
-    height: 56px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -30,6 +28,7 @@ export const BttonCat = styled.button`
     font-weight: 600;
     background: transparent;
     border: none !important;
+    margin-top:17px
 `;
 export const Item = styled.div`
   padding: 4px 1vw 32px 1vw;

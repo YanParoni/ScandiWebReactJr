@@ -37,6 +37,7 @@ query {
       name
      gallery
      inStock
+     description
      prices {
          currency
          amount

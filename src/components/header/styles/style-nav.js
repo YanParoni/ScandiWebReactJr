@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NavContainer = styled.div`
     display: flex;
     height: 100%;
-    width: 16vw;
+    width: 100vw;
     justify-content: flex-start;
     align-items: center;
     flex: 0;
@@ -12,7 +12,7 @@ export const NavContainer = styled.div`
 
 export const HeaderContainer = styled.div`  
 position: relative;
-width: 1440px;
+width: 100vw;
 height: 80px;
 left: 0px;
 top: 0px;
@@ -22,11 +22,9 @@ margin-bottom:80px;
 export const CurrencySelect = styled.div`
       border: none;
     outline: none;
+    font-family:Raleway;
     font-weight: 500;
     font-size: 18px;
-    line-height: 29px;
-    width: 38px;
-    height: 29px;
     position: relative;
     background-color: #ffffff;
     cursor: pointer;

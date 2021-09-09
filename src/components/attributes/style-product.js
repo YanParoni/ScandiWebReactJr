@@ -18,6 +18,7 @@ export const ProductImage = styled.img`
     width: 42.361vw;
     height: 35vw;
     object-fit: contain;
+    margin:0
 `;
 
 export const ProductDetailsContainer = styled.div`
