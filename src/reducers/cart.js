@@ -1,3 +1,5 @@
+import equal from "deep-equal";
+import {addItemToCart, removeItemFromCart} from './cart.utils';
 import {
   PRODUCTS,
   SEARCH_INPUT,
@@ -26,27 +28,22 @@ function cart(state = INITIAL_STATE, action) {
         ...state,
         products: action.state,
       };
-
     case SEARCH_INPUT:
       return {
         ...state,
         input: action.state,
       };
-
     case ADD_TO_CART:
+     
       return {
         ...state,
-        cart: [...state.cart, action.state],
+        cart:addItemToCart(state.cart, action.state),      
       };
-
     case REMOVE_FROM_CART:
       return {
         ...state,
-        cart: state.cart.filter(
-          (item) => item.productId !== action.payload.productId
-        ),
+        cart: removeItemFromCart(state.cart, action.state)
       };
-
     case ADJUST_ITEM_QTY:
       return {
         ...state,
@@ -57,26 +54,22 @@ function cart(state = INITIAL_STATE, action) {
             : item
         ),
       };
-
     case LOAD_CURRENT_ITEM:
       return {
         ...state,
         currentItem: action.payload,
       };
-
     case SEND_CATEGORY:
       console.log(action.payload);
       return {
         ...state,
         category: action.state,
       };
-
     case SEND_CURRENCY:
       return {
         ...state,
         currency: action.state,
       };
-
     default:
       return state;
   }

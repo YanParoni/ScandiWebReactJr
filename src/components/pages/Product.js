@@ -57,12 +57,12 @@ class Product extends Component {
 
   handleAddToCart() {
     const { send } = this.props;
-    const { savedAttributes, item } = this.state;
+    const { savedAttributes, item:prod } = this.state;
     const notNull = this.state.savedAttributes.every((i) => i.item !== null);
     if (notNull) {
       let cu = {};
-      cu.savedAttribute = savedAttributes;
-      cu.item = item;
+      cu.savedAttribute = savedAttributes.map(item=>item.item)
+      cu.item = prod;
       send(cu);
     } else {
       alert("Please select the attributes of your item =)");
@@ -92,17 +92,7 @@ class Product extends Component {
       this.setState({ chosenImage: img });
     }
   }
-
   findEqual(){
-    const {cart} = this.props;
-    const {savedAttributes} = this.state
-    const cartAtt = cart.map(item=>item.savedAttribute).map((item,id)=>item)
-    const flatCartAtt = cartAtt.flat(Infinity)
-    const savedAtt=savedAttributes.map(item=>item.item.value)
-    const [itemInCart] = savedAtt
-    console.log(itemInCart)
-    const inCart = flatCartAtt.map(item=>item.item.value).some(item=>item===itemInCart)
-    console.log(inCart)
   }
 
   render() {

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent,Component } from "react";
 import Navbar from "../header/Navbar";
 import { connect } from "react-redux";
 import Attributes from "../attributes/Attributes.js";
 import getSymbolFromCurrency from "currency-symbol-map";
-
+import { removeFromCart } from "../../actions";
 import {
   AttributeGroup,
   AttributeGroupName,
@@ -26,20 +26,34 @@ import {
 } from "./cart-styles";
 import CartGallery from "./CartGallery";
 
-class CartDetails extends Component {
+class CartDetails extends PureComponent {
   constructor() {
     super();
     this.state = {
       item: [],
     };
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   componentDidMount() {
     this.setState({ item: this.props.cart });
   }
 
+  componentDidUpdate(prevProps,prevState){
+    if(prevProps.cart !== this.props.cart){
+      this.setState({ item: this.props.cart });
+
+    }
+  }
+
+  handleRemove({item}){
+    const{ remove } = this.props
+    remove(item)
+    console.log(item)
+    this.state.item.pop(item)
+  }
   render() {
-    const { currency } = this.props;
+    const { currency, remove } = this.props;
     return (
       <>
         <Navbar />
@@ -68,7 +82,7 @@ class CartDetails extends Component {
               <CartItemActionsContainer>
                 <CartCountButton>+</CartCountButton>
 
-                <CartCountButton>-</CartCountButton>
+                <CartCountButton value={item} onClick={()=>this.handleRemove({item})}>-</CartCountButton>
                 </CartItemActionsContainer>
 
                 <CartGallery images={item.item.gallery} />
@@ -86,4 +100,8 @@ const mapStateToProps = (state) => ({
   currency: state.cart.currency,
 });
 
-export default connect(mapStateToProps)(CartDetails);
+const mapDispatchToProps = (dispatch) => ({
+  remove:(state)=>dispatch(removeFromCart(state))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(CartDetails);

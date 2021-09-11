@@ -38,13 +38,11 @@ export const addToCart = (state) => {
   };
 };
 
-export const removeFromCart = (itemID) => {
+export const removeFromCart = (state) => {
   return {
     type: REMOVE_FROM_CART,
-    payload: {
-      productId: itemID,
-    },
-  };
+      state
+    };
 };
 
 export const adjustItemQty = (itemID, amount) => {

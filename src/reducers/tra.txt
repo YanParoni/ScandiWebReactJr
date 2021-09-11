@@ -1,0 +1,14 @@
+ const cartAtt = state.cart.map(item=>item.savedAttribute).map((item,id)=>item)
+    const flatCartAtt = cartAtt.flat(Infinity)
+    const savedAtt=action.state.savedAttribute.map(item=>item.item.value)
+    const [itemInCart] = savedAtt
+    const inCart = flatCartAtt.map(item=>item.item.value).map(item=>item).find(item=>item===itemInCart)
+      return {
+        ...state,
+        cart: inCart
+        ?state.cart.find((item)=>
+        item.savedAttribute.item.value===action.state.savedAttribute.item.value
+        ?{amount:item.amount +1}
+        :item)
+        : [...state.cart,{...action.state,amount:1}]
+      };
