@@ -30,7 +30,6 @@ if(cartCheck.quantity===1){
     (e,i)=> e.item.value !== cartItemToRemove.savedAttribute[i].item.value
   ))
 }
-  console.log(cu)
   return cartItems.map((cartItem) =>
     cartItem.savedAttribute.every(
       (e,i)=> e.item.value === cartItemToRemove.savedAttribute[i].item.value
