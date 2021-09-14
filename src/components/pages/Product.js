@@ -61,7 +61,7 @@ class Product extends Component {
     const notNull = this.state.savedAttributes.every((i) => i.item !== null);
     if (notNull) {
       let cu = {};
-      cu.savedAttribute = savedAttributes.map(item=>item.item)
+      cu.savedAttribute = savedAttributes
       cu.item = prod;
       send(cu);
     } else {

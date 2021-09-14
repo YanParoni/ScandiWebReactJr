@@ -4,13 +4,13 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   );
   const other = cartItems.find((item) =>
     item.savedAttribute.every(
-      (e, i) => e.value === cartItemToAdd.savedAttribute[i].value
+      (e, i) => e.item.value === cartItemToAdd.savedAttribute[i].item.value
     )
   );
   if (other && match) {
     return cartItems.map((cartItem) =>
       cartItem.savedAttribute.every(
-        (e, i) => e.value === cartItemToAdd.savedAttribute[i].value
+        (e, i) => e.item.value === cartItemToAdd.savedAttribute[i].item.value
       )
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
@@ -20,19 +20,20 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 };
 
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
-  const checkItemInStore = cartItems.find(
-    (cartItem) => cartItem.item.name === cartItemToRemove.item.name
-  );
-  if (checkItemInStore.quantity === 1) {
-    return cartItems.filter(
-      (cartItem) => cartItem.savedAttribute.every(
-        (e,i) => e.value === cartItemToRemove.savedAttribute[i].value
-      )
-    );
-  }
+  const cartCheck =cartItems.find((cartItem) =>
+  cartItem.item.name === cartItemToRemove.item.name && cartItem.savedAttribute.every(
+    (e,i)=> e.value === cartItemToRemove.savedAttribute[i].value
+  ))
+if(cartCheck.quantity===1){
+ return cartItems.filter((cartItem) =>
+     cartItem.savedAttribute.every(
+    (e,i)=> e.item.value !== cartItemToRemove.savedAttribute[i].item.value
+  ))
+}
+  console.log(cu)
   return cartItems.map((cartItem) =>
-    cartItem.item.name === cartItemToRemove.item.name && cartItem.savedAttribute.every(
-      (e,i)=> e.value === cartItemToRemove.savedAttribute[i].value
+    cartItem.savedAttribute.every(
+      (e,i)=> e.item.value === cartItemToRemove.savedAttribute[i].item.value
     )
       ? {
           ...cartItem,

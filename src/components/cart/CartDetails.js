@@ -49,8 +49,7 @@ class CartDetails extends PureComponent {
   handleRemove({item}){
     const{ remove } = this.props
     remove(item)
-    console.log(item)
-    this.state.item.pop(item)
+
   }
   render() {
     const { currency, remove } = this.props;

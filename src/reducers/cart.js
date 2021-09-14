@@ -1,4 +1,3 @@
-import equal from "deep-equal";
 import {addItemToCart, removeItemFromCart} from './cart.utils';
 import {
   PRODUCTS,
