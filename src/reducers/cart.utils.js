@@ -1,3 +1,5 @@
+import cart from "./cart";
+
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const match = cartItems.find(
     (item) => item.item.name === cartItemToAdd.item.name
@@ -41,3 +43,9 @@ if(cartCheck.quantity===1){
       : cartItem
   );
 };
+
+
+export const changeAttribute = (cartItems,attributeToChange) => {
+  const {attr, itemID} = attributeToChange
+return cartItems.filter(({savedAttribute},item,id)=>item[id]===item[itemID]).map((item)=>({...item,savedAttribute:[attr]}))
+}

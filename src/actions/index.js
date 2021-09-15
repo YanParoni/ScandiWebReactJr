@@ -9,6 +9,8 @@ export const ADJUST_ITEM_QTY = 'ADJUST_ITEM_QTY';
 export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';
 export const SEND_CATEGORY = 'SEND_CATEGORY';
 export const SEND_CURRENCY = 'SEND_CURRENCY';
+export const CHANGE_ATTRIBUTE = 'CHANGE_ATTRIBUTE';
+
 
 export const sendProducts = (state) => ({
   type: PRODUCTS,
@@ -61,3 +63,13 @@ export const loadCurrentItem = (item) => {
     payload: item,
   };
 };
+
+export const changeAttribute = (attr,itemID) => {
+  return{
+    type: CHANGE_ATTRIBUTE,
+    payload: {
+      attr,
+      itemID,
+    }
+  }
+}

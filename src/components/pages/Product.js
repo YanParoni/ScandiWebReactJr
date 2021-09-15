@@ -29,7 +29,6 @@ class Product extends Component {
     this.saveAttribute = this.saveAttribute.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.makeActive = this.makeActive.bind(this);
-    this.findEqual = this.findEqual.bind(this);
 
     this.state = {
       item: {},
@@ -70,6 +69,7 @@ class Product extends Component {
   }
 
   saveAttribute({ attr }) {
+    console.log(attr)
     const attributes = this.state.savedAttributes.map((i) => {
       if (i.id === attr.id) {
         return {
@@ -92,8 +92,7 @@ class Product extends Component {
       this.setState({ chosenImage: img });
     }
   }
-  findEqual(){
-  }
+  
 
   render() {
     const { savedAttributes } = this.state;
@@ -130,8 +129,7 @@ class Product extends Component {
                   )}
                 </ProductPrice>
                 <Button
-                  onClick={()=>{this.handleAddToCart();
-                  this.findEqual()}}
+                  onClick={()=> this.handleAddToCart()}
                   inStock={product.inStock}
                 >
                   {product.inStock ? "add to cart" : "out of stock"}

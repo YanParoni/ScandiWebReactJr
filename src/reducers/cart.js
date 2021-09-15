@@ -1,4 +1,4 @@
-import {addItemToCart, removeItemFromCart} from './cart.utils';
+import {addItemToCart, removeItemFromCart, changeAttribute} from './cart.utils';
 import {
   PRODUCTS,
   SEARCH_INPUT,
@@ -8,6 +8,7 @@ import {
   LOAD_CURRENT_ITEM,
   SEND_CATEGORY,
   SEND_CURRENCY,
+  CHANGE_ATTRIBUTE,
 } from "../actions";
 
 const INITIAL_STATE = {
@@ -18,6 +19,7 @@ const INITIAL_STATE = {
   currentItem: [],
   index: 0,
   currency: 0,
+  sla:[]
 };
 
 function cart(state = INITIAL_STATE, action) {
@@ -69,6 +71,11 @@ function cart(state = INITIAL_STATE, action) {
         ...state,
         currency: action.state,
       };
+      case CHANGE_ATTRIBUTE:
+        return {
+          ...state,
+          cart: changeAttribute(state.cart,action.payload)
+        }
     default:
       return state;
   }
