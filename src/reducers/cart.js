@@ -19,7 +19,7 @@ const INITIAL_STATE = {
   currentItem: [],
   index: 0,
   currency: 0,
-  sla:[]
+  sla:cart
 };
 
 function cart(state = INITIAL_STATE, action) {

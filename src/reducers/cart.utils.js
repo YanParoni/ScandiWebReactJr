@@ -1,5 +1,3 @@
-import cart from "./cart";
-
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const match = cartItems.find(
     (item) => item.item.name === cartItemToAdd.item.name
@@ -22,19 +20,23 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 };
 
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
-  const cartCheck =cartItems.find((cartItem) =>
-  cartItem.item.name === cartItemToRemove.item.name && cartItem.savedAttribute.every(
-    (e,i)=> e.value === cartItemToRemove.savedAttribute[i].value
-  ))
-if(cartCheck.quantity===1){
- return cartItems.filter((cartItem) =>
-     cartItem.savedAttribute.every(
-    (e,i)=> e.item.value !== cartItemToRemove.savedAttribute[i].item.value
-  ))
-}
+  const cartCheck = cartItems.find(
+    (cartItem) =>
+      cartItem.item.name === cartItemToRemove.item.name &&
+      cartItem.savedAttribute.every(
+        (e, i) => e.value === cartItemToRemove.savedAttribute[i].value
+      )
+  );
+  if (cartCheck.quantity === 1) {
+    return cartItems.filter((cartItem) =>
+      cartItem.savedAttribute.every(
+        (e, i) => e.item.value !== cartItemToRemove.savedAttribute[i].item.value
+      )
+    );
+  }
   return cartItems.map((cartItem) =>
     cartItem.savedAttribute.every(
-      (e,i)=> e.item.value === cartItemToRemove.savedAttribute[i].item.value
+      (e, i) => e.item.value === cartItemToRemove.savedAttribute[i].item.value
     )
       ? {
           ...cartItem,
@@ -44,8 +46,9 @@ if(cartCheck.quantity===1){
   );
 };
 
-
-export const changeAttribute = (cartItems,attributeToChange) => {
-  const {attr, itemID} = attributeToChange
-return cartItems.filter(({savedAttribute},item,id)=>item[id]===item[itemID]).map((item)=>({...item,savedAttribute:[attr]}))
-}
+export const changeAttribute = (cartItems, attributeToChange) => {
+  const { attr, itemID } = attributeToChange;
+  return cartItems
+    .filter((item, id) => item[id] === item[itemID] )
+    .map((item) => ({ ...item, savedAttribute:cartItems[itemID].savedAttribute.map((item)=>item.id === attr.id?attr: item) }));
+};

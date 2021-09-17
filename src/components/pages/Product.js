@@ -69,7 +69,6 @@ class Product extends Component {
   }
 
   saveAttribute({ attr }) {
-    console.log(attr)
     const attributes = this.state.savedAttributes.map((i) => {
       if (i.id === attr.id) {
         return {

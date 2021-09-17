@@ -142,3 +142,7 @@ export const Title = styled.span`
   color: #1d1f22;
 `;
 
+export const Btn = styled.span`
+background: "transparent",
+border: "none !important",
+fontSize: "0",`

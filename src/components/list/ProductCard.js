@@ -12,10 +12,11 @@ import {
   OutOfStockOverlay,
   OutOfStockText,
   ItemTop,
+  Btn
 } from "./list-style";
 
 import getSymbolFromCurrency from "currency-symbol-map";
-import { loadCurrentItem } from "../../actions";
+import { loadCurrentItem, sendProducts } from "../../actions";
 
 class ProductCard extends Component {
   constructor(props) {
@@ -33,9 +34,14 @@ class ProductCard extends Component {
     this.setState({ hover: false });
   }
 
+  addToCart(item){
+    const { add } = this.props;
+    add(item)
+  }
+
   render() {
     const { item } = this.props;
-    const { prices, amount, id, sendItem } = this.props;
+    const { prices, amount, id, sendItem, add,AddBtn } = this.props;
     return (
       <>
         <ItemContainer
@@ -45,7 +51,7 @@ class ProductCard extends Component {
         >
           <ItemTop>
             <StyledLink to={`/product/${id}`}>
-              <button
+              <Btn
                 style={{
                   background: "transparent",
                   border: "none !important",
@@ -59,9 +65,9 @@ class ProductCard extends Component {
                     src={item.gallery[0]}
                   ></ProductImage>
                 </ProductImageContainer>
-              </button>
+              </Btn>
             </StyledLink>
-            {this.state.hover && item.inStock && <BtnCart />}
+            {this.state.hover && item.inStock && <BtnCart  />}
             {!item.inStock && (
               <OutOfStockOverlay>
                 <OutOfStockText>out of stock</OutOfStockText>
@@ -78,6 +84,7 @@ class ProductCard extends Component {
 }
 const mapDispatchToProps = (dispatch) => ({
   sendItem: (item) => dispatch(loadCurrentItem(item)),
+  add:(item)=> dispatch(sendProducts(item))
 });
 
 export default connect(null, mapDispatchToProps)(ProductCard);
