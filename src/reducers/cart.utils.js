@@ -1,3 +1,4 @@
+const equal = require("fast-deep-equal/es6/react");
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const match = cartItems.find(
     (item) => item.item.name === cartItemToAdd.item.name
@@ -7,6 +8,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
       (e, i) => e.item.value === cartItemToAdd.savedAttribute[i].item.value
     )
   );
+
   if (other && match) {
     return cartItems.map((cartItem) =>
       cartItem.savedAttribute.every(
@@ -48,7 +50,14 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
 
 export const changeAttribute = (cartItems, attributeToChange) => {
   const { attr, itemID } = attributeToChange;
-  return cartItems
-    .filter((item, id) => item[id] === item[itemID] )
-    .map((item) => ({ ...item, savedAttribute:cartItems[itemID].savedAttribute.map((item)=>item.id === attr.id?attr: item) }));
+
+  return cartItems.map((item) =>
+    item === itemID
+   ? {
+     ...item,
+     savedAttribute:item.savedAttribute.map(item=>item.id===attr.id?attr:item)
+   }
+   : item
+  );
+  
 };

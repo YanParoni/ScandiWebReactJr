@@ -60,7 +60,8 @@ class CartDetails extends PureComponent {
 
   saveAttribute(attr){
     const { attr:attribute, itemID} = attr
-    this.props.change(attribute,itemID)
+    const {item}=this.state
+    this.props.change(attribute,item[itemID])
   }
 
   render() {

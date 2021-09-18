@@ -38,7 +38,8 @@ function cart(state = INITIAL_STATE, action) {
      
       return {
         ...state,
-        cart:addItemToCart(state.cart, action.state),      
+        cart:addItemToCart(state.cart, action.state),     
+        sla: addItemToCart(state.cart, action.state),     
       };
     case REMOVE_FROM_CART:
       return {
