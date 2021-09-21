@@ -1,4 +1,3 @@
-const equal = require("fast-deep-equal/es6/react");
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const match = cartItems.find(
     (item) => item.item.name === cartItemToAdd.item.name

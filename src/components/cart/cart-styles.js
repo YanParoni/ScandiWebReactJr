@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
+import { Link,NavLink } from "react-router-dom";
 export const CartContainer = styled.div`
   width: 100%;
   padding: 80px 16vw 54px 7vw;
@@ -63,6 +62,9 @@ export const Title = styled.h1`
     margin-bottom: 60px;
 `
 
+export const CartLink = styled(NavLink)`
+    position: relative;
+`;
 export const ItemNameLink = styled(Link)`
   text-decoration: none;
   color: black;
@@ -73,6 +75,7 @@ export const ItemNameLink = styled(Link)`
   &:active {
     text-decoration: none;
   }
+  
 `;
 
 export const CartItemPrice = styled.span`
@@ -87,7 +90,7 @@ export const CartItemPrice = styled.span`
 
 export const CartCountButton = styled.button`
   background-color: #fff;
-  border: 1px solid var(--black);
+  border: 1px solid #000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,9 +104,63 @@ export const CartCountButton = styled.button`
 export const CartItemCount = styled.span`
   font-size: 500;
   font-size: 24px;
-  line-height: 160%;
-  color: var(--black);
+  line-height: 130%;
+  color: #000000;
 `;
+
+export const CartItemCountShape = styled.div`
+    display: block;
+    padding: 2px;
+    min-width: 20px;
+    font-size: 14px;
+
+    height: 20px;
+    color: #1D1F22;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+`;
+export const CartItemCountContent = styled.span`
+    color: #ffff;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+    line-height: 16px;
+`;
+
+export const ActionContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2vw;
+`;
+
+export const LogoContainer = styled.div`
+    margin: 0 auto;
+    display: flex;
+    width: 41px;
+    align-items: center;
+    justify-content: center;
+`;
+
+
+export const CartIconContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+        position: relative;
+        svg{
+          width:20px;
+        }
+`;
+
+
 
 export const CartItemImageContainer = styled.div`
   position: relative;

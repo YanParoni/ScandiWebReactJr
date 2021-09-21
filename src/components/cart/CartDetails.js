@@ -93,6 +93,7 @@ class CartDetails extends PureComponent {
                   handleClick={this.saveAttribute}
                   itemID={id}
                 />
+
                 </CartItemDetailsContainer>
               <CartItemActionsContainer>
                 <CartCountButton value={item} onClick={()=>this.handleIncrease({item})}>+</CartCountButton>

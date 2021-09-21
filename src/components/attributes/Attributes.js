@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
 export default class Attributes extends PureComponent {
   constructor(props) {
@@ -6,9 +7,8 @@ export default class Attributes extends PureComponent {
     this.state = {};
     this.isAttrActive = this.isAttrActive.bind(this);
   }
+  
   isAttrActive(selectAttribute, chosenAttributes) {
-    console.log(selectAttribute)
-    console.log(chosenAttributes)
     return Boolean(
       chosenAttributes.find(
           (i) => i.id === selectAttribute.id && i.item?.id === selectAttribute.item.id
@@ -20,7 +20,7 @@ export default class Attributes extends PureComponent {
   
 
   render() {
-    const { Container, AttLabel, LabelGroup, item, handleClick, Button, error,itemID } = this.props;
+    const { Container, AttLabel, LabelGroup, item, handleClick, Button, itemID } = this.props;
 
 
     return (
@@ -60,3 +60,10 @@ export default class Attributes extends PureComponent {
     );
   }
 }
+
+Attributes.propTypes = {
+  Container: PropTypes.object.isRequired,
+  Button: PropTypes.object.isRequired,
+  handleClick: PropTypes.func,
+  chosenAttributes: PropTypes.array,
+};

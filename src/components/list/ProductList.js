@@ -32,7 +32,7 @@ class ProductList extends Component {
                 <ProductCard
                   key={id}
                   item={item}
-                  id={id}
+                  id={item.name}
                   prices={item.prices[currentCurr].currency}
                   amount={item.prices[currentCurr].amount}
                 />
