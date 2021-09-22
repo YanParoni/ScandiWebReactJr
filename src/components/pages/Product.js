@@ -16,7 +16,7 @@ import {
   ProductImage,
   ProductContainer,
   DetailsContainer,
-  Description
+  Description,
 } from "../general-styles/styles";
 import { addToCart } from "../../actions";
 import Gallery from "../attributes/Gallery";
@@ -56,11 +56,11 @@ class Product extends Component {
 
   handleAddToCart() {
     const { send } = this.props;
-    const { savedAttributes, item:prod } = this.state;
+    const { savedAttributes, item: prod } = this.state;
     const notNull = this.state.savedAttributes.every((i) => i.item !== null);
     if (notNull) {
       let cu = {};
-      cu.savedAttribute = savedAttributes
+      cu.savedAttribute = savedAttributes;
       cu.item = prod;
       send(cu);
     } else {
@@ -91,7 +91,6 @@ class Product extends Component {
       this.setState({ chosenImage: img });
     }
   }
-  
 
   render() {
     const { savedAttributes } = this.state;
@@ -128,7 +127,7 @@ class Product extends Component {
                   )}
                 </ProductPrice>
                 <Button
-                  onClick={()=> this.handleAddToCart()}
+                  onClick={() => this.handleAddToCart()}
                   inStock={product.inStock}
                 >
                   {product.inStock ? "add to cart" : "out of stock"}

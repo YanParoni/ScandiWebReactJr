@@ -52,11 +52,12 @@ export const changeAttribute = (cartItems, attributeToChange) => {
 
   return cartItems.map((item) =>
     item === itemID
-   ? {
-     ...item,
-     savedAttribute:item.savedAttribute.map(item=>item.id===attr.id?attr:item)
-   }
-   : item
+      ? {
+          ...item,
+          savedAttribute: item.savedAttribute.map((item) =>
+            item.id === attr.id ? attr : item
+          ),
+        }
+      : item
   );
-  
 };

@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { getCurrencies } from '../../Graphql/queries';
-import client from '../../Graphql/apolloClient';
-import { connect } from 'react-redux';
-import { sendCurrency } from '../../actions';
-import { CurrencySelect } from './styles/style-nav';
-import getSymbolFromCurrency from 'currency-symbol-map';
-import { ReactComponent as DownArrow } from './svg/down.svg';
-import { ReactComponent as UpArrow } from './svg/up.svg';
-
+import React, { Component } from "react";
+import { getCurrencies } from "../../Graphql/queries";
+import client from "../../Graphql/apolloClient";
+import { connect } from "react-redux";
+import { sendCurrency } from "../../actions";
+import { CurrencySelect } from "./styles/style-nav";
+import getSymbolFromCurrency from "currency-symbol-map";
+import { ReactComponent as DownArrow } from "./svg/down.svg";
+import { ReactComponent as UpArrow } from "./svg/up.svg";
 
 class Currency extends Component {
   constructor() {
@@ -28,11 +27,11 @@ class Currency extends Component {
 
   componentDidMount() {
     this.fetchCurrency();
-    document.addEventListener('click', this.handleOutsideClick);
+    document.addEventListener("click", this.handleOutsideClick);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.handleOutsideClick);
+    document.removeEventListener("click", this.handleOutsideClick);
   }
 
   toggleModal() {
@@ -45,7 +44,7 @@ class Currency extends Component {
     const result = await client.query({
       query: getCurrencies,
     });
-    document.addEventListener('click', this.handleOutsideClick);
+    document.addEventListener("click", this.handleOutsideClick);
     this.setState({ currencies: result.data.currencies });
   }
 
@@ -59,8 +58,10 @@ class Currency extends Component {
         onClick={this.toggleModal}
         active={this.state.showOptions}
       >
-       <span> {`${getSymbolFromCurrency(this.state.currencies[selected])}`} 
-        {this.state.showModal ? <DownArrow/> : <UpArrow/>}
+        <span>
+          {" "}
+          {`${getSymbolFromCurrency(this.state.currencies[selected])}`}
+          {this.state.showModal ? <DownArrow /> : <UpArrow />}
         </span>
         <div id="options">
           {this.state.showModal &&

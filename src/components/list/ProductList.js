@@ -1,8 +1,8 @@
-import { valueToObjectRepresentation } from '@apollo/client/utilities';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ProductsContainer,Title } from './list-style';
-import ProductCard from './ProductCard';
+import { valueToObjectRepresentation } from "@apollo/client/utilities";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { ProductsContainer, Title } from "./list-style";
+import ProductCard from "./ProductCard";
 
 class ProductList extends Component {
   constructor() {

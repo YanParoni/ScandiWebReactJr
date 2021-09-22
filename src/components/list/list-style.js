@@ -8,11 +8,12 @@ export const ProductsContainer = styled.div`
   grid-auto-flow: row dense;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr 1fr;
-  gap: 100px 40px;
+  gap: 80px 40px;
   justify-content: center;
   align-content: center;
   justify-items: end;
   align-items: end;
+  margin-right: 80px;
 `;
 
 export const ProductImage = styled.img`
@@ -21,8 +22,8 @@ export const ProductImage = styled.img`
   object-fit: contain;
 `;
 export const ProductImageContainer = styled.div`
-  width: 354px;
-  height: 330px;
+  width: 386px;
+  height: 440px;
 `;
 
 export const ItemName = styled.span`
@@ -48,7 +49,8 @@ export const ItemName = styled.span`
   line-height: 29px;
   letter-spacing: 0px;
   text-align: left;
-  align-items: center; ;
+  align-items: center;
+  margin-top: 30px;
 `;
 
 export const ItemContainer = styled.div`
@@ -67,6 +69,7 @@ export const ItemPrice = styled.span`
   color: #1d1f22;
   display: block;
   font-weight: 500;
+  margin-top: 5px;
   width: auto;
   height: 29px;
   text-decoration: none;
@@ -145,4 +148,4 @@ export const Title = styled.span`
 export const Btn = styled.span`
 background: "transparent",
 border: "none !important",
-fontSize: "0",`
+fontSize: "0",`;

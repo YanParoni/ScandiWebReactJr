@@ -44,6 +44,11 @@ class CartModal extends PureComponent {
     this.setState({ item: this.props.cart });
   }
 
+  componentDidUpdate(prevState) {
+    if (this.props.cart !== prevState.cart)
+      this.setState({ item: this.props.cart });
+  }
+
   saveAttribute(attr) {
     const { attr: attribute, itemID } = attr;
     const { item } = this.state;
@@ -80,7 +85,7 @@ class CartModal extends PureComponent {
             &nbsp;
             <ItemCount>{Object.keys(cart).length} items</ItemCount>
           </div>
-          {cart !==undefined &&
+          {cart !== undefined &&
             cart.map((item, id) => (
               <ItemContainer key={id}>
                 <NameAndPrice>
@@ -88,8 +93,8 @@ class CartModal extends PureComponent {
                     to={`/product/${item.item.name}`}
                     onClick={() => this.props.setModal(false)}
                   >
-                    <ItemNumbers>{item.item.name} </ItemNumbers>
-                    <ItemPrice>{item.item.prices[0].amount}</ItemPrice>
+                    <ItemName>{item.item.name} </ItemName>
+                    <ItemName>{item.item.prices[0].amount}</ItemName>
                   </ItemNameLink>
                 </NameAndPrice>
                 <Attributes

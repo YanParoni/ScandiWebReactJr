@@ -1,15 +1,14 @@
-@import './colors.scss';
-
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   font-family: "Raleway", sans-serif;
   overflow-x: hidden;
-  background: #FFFFFF;
+  background: #ffffff;
 }

@@ -1,23 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import client from './Graphql/apolloClient'
-import { Provider } from 'react-redux';
-import store from './store';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import client from "./Graphql/apolloClient";
+import { Provider } from "react-redux";
+import store from "./store";
 
+import { ApolloProvider } from "@apollo/client";
 
-import {
-  ApolloProvider
-} from "@apollo/client";
- 
 ReactDOM.render(
   <ApolloProvider client={client}>
-      <Provider store={store}>
+    <Provider store={store}>
       <App />
-      </Provider>
+    </Provider>
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

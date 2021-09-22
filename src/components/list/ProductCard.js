@@ -12,11 +12,11 @@ import {
   OutOfStockOverlay,
   OutOfStockText,
   ItemTop,
-  Btn
+  Btn,
 } from "./list-style";
 
 import getSymbolFromCurrency from "currency-symbol-map";
-import { loadCurrentItem, sendProducts,addToCart } from "../../actions";
+import { loadCurrentItem, sendProducts, addToCart } from "../../actions";
 
 class ProductCard extends Component {
   constructor(props) {
@@ -34,21 +34,21 @@ class ProductCard extends Component {
     this.setState({ hover: false });
   }
 
-  addToCart(item){
+  addToCart(item) {
     const { add } = this.props;
     let selectAttribute;
-    const format = item.attributes.map((attr)=> {
+    const format = item.attributes.map((attr) => {
       const { items, type, id, name } = attr;
-      const item=items.find(attr =>selectAttribute={item:attr}) 
-      return attr= {item,type,id,name}
-    })
-    const newItem = Object.assign({}, {item}, { savedAttribute: format }); 
-    add(newItem)
+      const item = items.find((attr) => (selectAttribute = { item: attr }));
+      return (attr = { item, type, id, name });
+    });
+    const newItem = Object.assign({}, { item }, { savedAttribute: format });
+    add(newItem);
   }
 
   render() {
     const { item } = this.props;
-    const { prices, amount, id, sendItem, add,AddBtn } = this.props;
+    const { prices, amount, id, sendItem, add, AddBtn } = this.props;
     return (
       <>
         <ItemContainer
@@ -74,7 +74,9 @@ class ProductCard extends Component {
                 </ProductImageContainer>
               </Btn>
             </StyledLink>
-            {this.state.hover && item.inStock && <BtnCart onClick={()=>this.addToCart(item)}  />}
+            {this.state.hover && item.inStock && (
+              <BtnCart onClick={() => this.addToCart(item)} />
+            )}
             {!item.inStock && (
               <OutOfStockOverlay>
                 <OutOfStockText>out of stock</OutOfStockText>
@@ -82,8 +84,7 @@ class ProductCard extends Component {
             )}
           </ItemTop>
           <ItemName>{item.name}</ItemName>
-          <ItemPrice>{`${getSymbolFromCurrency(prices)}`}</ItemPrice>
-          <ItemPrice>{amount}</ItemPrice>
+          <ItemPrice>{`${getSymbolFromCurrency(prices)}${amount}`}</ItemPrice>
         </ItemContainer>
       </>
     );
@@ -91,7 +92,7 @@ class ProductCard extends Component {
 }
 const mapDispatchToProps = (dispatch) => ({
   sendItem: (item) => dispatch(loadCurrentItem(item)),
-  add:(item)=> dispatch(addToCart(item))
+  add: (item) => dispatch(addToCart(item)),
 });
 
 export default connect(null, mapDispatchToProps)(ProductCard);

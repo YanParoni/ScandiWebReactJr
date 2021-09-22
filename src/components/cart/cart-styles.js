@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link,NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const CartContainer = styled.div`
   width: 100%;
@@ -45,24 +45,24 @@ export const CartItemName = styled.span`
   color: black;
   line-height: 27px;
   &:hover {
-    color:#5ECE7B;
+    color: #5ece7b;
   }
 `;
 
 export const Title = styled.h1`
   margin: 0;
-    padding: 0;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 40px;
-    height: 40px;
-    text-transform: uppercase;
-    width: 6vw;
-    margin-bottom: 60px;
-`
+  padding: 0;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  height: 40px;
+  text-transform: uppercase;
+  width: 6vw;
+  margin-bottom: 60px;
+`;
 
 export const CartLink = styled(NavLink)`
-    position: relative;
+  position: relative;
 `;
 export const ItemNameLink = styled(Link)`
   text-decoration: none;
@@ -74,7 +74,6 @@ export const ItemNameLink = styled(Link)`
   &:active {
     text-decoration: none;
   }
-  
 `;
 
 export const CartItemPrice = styled.span`
@@ -108,58 +107,55 @@ export const CartItemCount = styled.span`
 `;
 
 export const CartItemCountShape = styled.div`
-    display: block;
-    padding: 2px;
-    min-width: 20px;
-    font-size: 14px;
+  display: block;
+  padding: 2px;
+  min-width: 20px;
+  font-size: 14px;
 
-    height: 20px;
-    color: #1D1F22;
-    background-color: #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 60px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
+  height: 20px;
+  color: #1d1f22;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 60px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 `;
 export const CartItemCountContent = styled.span`
-    color: #ffff;
-    font-weight: 700;
-    font-size: 14px;
-    font-family: "Roboto", sans-serif;
-    line-height: 16px;
+  color: #ffff;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  line-height: 16px;
 `;
 
 export const ActionContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 2vw;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2vw;
 `;
 
 export const LogoContainer = styled.div`
-    margin: 0 auto;
-    display: flex;
-    width: 41px;
-    align-items: center;
-    justify-content: center;
+  margin: 0 auto;
+  display: flex;
+  width: 41px;
+  align-items: center;
+  justify-content: center;
 `;
-
 
 export const CartIconContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
-        position: relative;
-        svg{
-          width:20px;
-        }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  position: relative;
+  svg {
+    width: 20px;
+  }
 `;
-
-
 
 export const CartItemImageContainer = styled.div`
   position: relative;
@@ -186,12 +182,14 @@ export const CartArrows = styled.div`
   align-items: center;
   background-color: none;
   cursor: pointer;
-  svg{
-    filter: invert(7%) sepia(7%) saturate(1063%) hue-rotate(176deg) brightness(94%) contrast(88%);
-          }
-          svg:hover {
-            filter: invert(77%) sepia(30%) saturate(732%) hue-rotate(80deg) brightness(90%) contrast(86%);
-          }
+  svg {
+    filter: invert(7%) sepia(7%) saturate(1063%) hue-rotate(176deg)
+      brightness(94%) contrast(88%);
+  }
+  svg:hover {
+    filter: invert(77%) sepia(30%) saturate(732%) hue-rotate(80deg)
+      brightness(90%) contrast(86%);
+  }
 `;
 
 export const CartArrowPrevious = styled(CartArrows)`
@@ -208,12 +206,11 @@ export const CartArrowNext = styled(CartArrows)`
   padding-right: 5px;
 `;
 
-
 export const TotalPriceContainer = styled.div`
-    display: flex;
-    width: 20vw;
-    justify-content: space-between;
-    margin: 43px 0 35px 0;
+  display: flex;
+  width: 20vw;
+  justify-content: space-between;
+  margin: 43px 0 35px 0;
 `;
 
 export const TotalPriceLabel = styled.span`

@@ -1,4 +1,8 @@
-import {addItemToCart, removeItemFromCart, changeAttribute} from './cart.utils';
+import {
+  addItemToCart,
+  removeItemFromCart,
+  changeAttribute,
+} from "./cart.utils";
 import {
   PRODUCTS,
   SEARCH_INPUT,
@@ -34,15 +38,14 @@ function cart(state = INITIAL_STATE, action) {
         input: action.state,
       };
     case ADD_TO_CART:
-     
       return {
         ...state,
-        cart:addItemToCart(state.cart, action.state),     
+        cart: addItemToCart(state.cart, action.state),
       };
     case REMOVE_FROM_CART:
       return {
         ...state,
-        cart: removeItemFromCart(state.cart, action.state)
+        cart: removeItemFromCart(state.cart, action.state),
       };
     case ADJUST_ITEM_QTY:
       return {
@@ -69,11 +72,11 @@ function cart(state = INITIAL_STATE, action) {
         ...state,
         currency: action.state,
       };
-      case CHANGE_ATTRIBUTE:
-        return {
-          ...state,
-          cart: changeAttribute(state.cart,action.payload)
-        }
+    case CHANGE_ATTRIBUTE:
+      return {
+        ...state,
+        cart: changeAttribute(state.cart, action.payload),
+      };
     default:
       return state;
   }
