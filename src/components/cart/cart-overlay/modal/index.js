@@ -9,8 +9,6 @@ import {
   Actions,
   ImageContainer,
   ItemName,
-  ItemNumbers,
-  ItemPrice,
   ItemCount,
   ItemImage,
   ModalContainer,

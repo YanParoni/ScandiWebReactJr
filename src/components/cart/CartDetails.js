@@ -1,4 +1,4 @@
-import React, { PureComponent, Component } from "react";
+import React, { PureComponent } from "react";
 import Navbar from "../header/Navbar";
 import { connect } from "react-redux";
 import Attributes from "../attributes/Attributes.js";
@@ -61,7 +61,7 @@ class CartDetails extends PureComponent {
   }
 
   render() {
-    const { currency, remove } = this.props;
+    const { currency } = this.props;
     return (
       <>
         <Navbar />
@@ -71,8 +71,8 @@ class CartDetails extends PureComponent {
             this.props.cart.map((item, id) => (
               <>
                 <div key={id}>
-                  <CartItemContainer>
-                    <CartItemDetailsContainer>
+                  <CartItemContainer key={id}>
+                    <CartItemDetailsContainer >
                       <ItemNameLink to={`/product/${item.item.id}`}>
                         <CartItemName>{item.item.name}</CartItemName>
                       </ItemNameLink>

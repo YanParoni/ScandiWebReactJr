@@ -1,4 +1,3 @@
-import { valueToObjectRepresentation } from "@apollo/client/utilities";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { ProductsContainer, Title } from "./list-style";
@@ -30,7 +29,7 @@ class ProductList extends Component {
             this.props.produc.map((item, id) => (
               <>
                 <ProductCard
-                  key={id}
+                  key={item.name}
                   item={item}
                   id={item.name}
                   prices={item.prices[currentCurr].currency}

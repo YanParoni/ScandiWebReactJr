@@ -14,7 +14,7 @@ class TotalPrice extends PureComponent {
     this.setState({ item });
   }
   render() {
-    const { totalPrice, currency, cart } = this.props;
+    const { totalPrice, currency } = this.props;
     const { item } = this.state;
     return (
       <TotalPriceContainer>

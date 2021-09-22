@@ -1,6 +1,4 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-
 import { AddToCartButton } from "./list-style";
 
 import { ReactComponent as CartIcon } from "./cart.svg";

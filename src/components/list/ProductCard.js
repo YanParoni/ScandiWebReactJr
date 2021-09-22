@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import BtnCart from "./BtnCart";
 import {
   ProductImage,
-  ProductsContainer,
   ProductImageContainer,
   ItemName,
   ItemPrice,
@@ -16,7 +15,7 @@ import {
 } from "./list-style";
 
 import getSymbolFromCurrency from "currency-symbol-map";
-import { loadCurrentItem, sendProducts, addToCart } from "../../actions";
+import { loadCurrentItem, addToCart } from "../../actions";
 
 class ProductCard extends Component {
   constructor(props) {
@@ -36,10 +35,9 @@ class ProductCard extends Component {
 
   addToCart(item) {
     const { add } = this.props;
-    let selectAttribute;
     const format = item.attributes.map((attr) => {
       const { items, type, id, name } = attr;
-      const item = items.find((attr) => (selectAttribute = { item: attr }));
+      const item = items.find((attr) => ({ item: attr }));
       return (attr = { item, type, id, name });
     });
     const newItem = Object.assign({}, { item }, { savedAttribute: format });
@@ -48,7 +46,7 @@ class ProductCard extends Component {
 
   render() {
     const { item } = this.props;
-    const { prices, amount, id, sendItem, add, AddBtn } = this.props;
+    const { prices, amount, id, sendItem } = this.props;
     return (
       <>
         <ItemContainer
