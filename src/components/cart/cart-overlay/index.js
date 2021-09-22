@@ -26,7 +26,7 @@ class CartOverlay extends React.PureComponent {
 
   handleLeave() {
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => this.setModal(false), 1000);
+    this.timeout = setTimeout(() => this.setModal(false), 500);
   }
 
   handleMouseOver() {
