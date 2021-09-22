@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { Link,NavLink } from "react-router-dom";
+
 export const CartContainer = styled.div`
   width: 100%;
   padding: 80px 16vw 54px 7vw;
 `;
-
-
 
 export const CartItems = styled.div``;
 
@@ -209,13 +208,12 @@ export const CartArrowNext = styled(CartArrows)`
   padding-right: 5px;
 `;
 
+
 export const TotalPriceContainer = styled.div`
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 30px;
-  margin-top: 40px;
-  width: 76vw;
-  text-align: right;
+    display: flex;
+    width: 20vw;
+    justify-content: space-between;
+    margin: 43px 0 35px 0;
 `;
 
 export const TotalPriceLabel = styled.span`

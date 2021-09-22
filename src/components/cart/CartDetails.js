@@ -1,17 +1,14 @@
-import React, { PureComponent,Component } from "react";
+import React, { PureComponent, Component } from "react";
 import Navbar from "../header/Navbar";
 import { connect } from "react-redux";
 import Attributes from "../attributes/Attributes.js";
 import getSymbolFromCurrency from "currency-symbol-map";
-import { removeFromCart,addToCart,changeAttribute  } from "../../actions";
+import { removeFromCart, addToCart, changeAttribute } from "../../actions";
 import {
   AttributeGroup,
   AttributeGroupName,
   AttributesContainer,
   AttributeButton,
-  AddToCartButton,
-  ProductBrand,
-  ProductName,
   ProductPrice,
 } from "../general-styles/styles";
 import {
@@ -33,7 +30,7 @@ class CartDetails extends PureComponent {
       item: [],
     };
     this.handleRemove = this.handleRemove.bind(this);
-    this.handleIncrease =  this.handleIncrease.bind(this);
+    this.handleIncrease = this.handleIncrease.bind(this);
     this.saveAttribute = this.saveAttribute.bind(this);
   }
 
@@ -41,27 +38,26 @@ class CartDetails extends PureComponent {
     this.setState({ item: this.props.cart });
   }
 
-  componentDidUpdate(prevProps,prevState){
-    if(prevProps.cart !== this.props.cart){
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.cart !== this.props.cart) {
       this.setState({ item: this.props.cart });
-
     }
   }
 
-  handleRemove({item}){
-    const{ remove } = this.props;
+  handleRemove({ item }) {
+    const { remove } = this.props;
     remove(item);
   }
-  
-  handleIncrease({item}){
+
+  handleIncrease({ item }) {
     const { send } = this.props;
-    send(item)
+    send(item);
   }
 
-  saveAttribute(attr){
-    const { attr:attribute, itemID} = attr
-    const {item}=this.state
-    this.props.change(attribute,item[itemID])
+  saveAttribute(attr) {
+    const { attr: attribute, itemID } = attr;
+    const { item } = this.state;
+    this.props.change(attribute, item[itemID]);
   }
 
   render() {
@@ -70,43 +66,52 @@ class CartDetails extends PureComponent {
       <>
         <Navbar />
         <CartContainer>
-        <Title>CART</Title>
-        {this.props.cart &&
-          this.props.cart.map((item,id) => (
-            <>
-            <div key={id}>
-              <CartItemContainer>
-              <CartItemDetailsContainer>
-                <ItemNameLink to={`/product/${item.item.id}`}>
-                  <CartItemName>{item.item.name}</CartItemName>
-                </ItemNameLink>
-                <ProductPrice>{`${getSymbolFromCurrency(
-                  item.item.prices[currency].currency
-                )} ${item.item.prices[currency].amount}`}</ProductPrice>
-                <Attributes
-                  item={item.item}
-                  Container={AttributesContainer}
-                  AttLabel={AttributeGroupName}
-                  LabelGroup={AttributeGroup}
-                  chosenAttributes={item.savedAttribute}
-                  Button={AttributeButton}
-                  handleClick={this.saveAttribute}
-                  itemID={id}
-                />
+          <Title>CART</Title>
+          {this.props.cart &&
+            this.props.cart.map((item, id) => (
+              <>
+                <div key={id}>
+                  <CartItemContainer>
+                    <CartItemDetailsContainer>
+                      <ItemNameLink to={`/product/${item.item.id}`}>
+                        <CartItemName>{item.item.name}</CartItemName>
+                      </ItemNameLink>
+                      <ProductPrice>{`${getSymbolFromCurrency(
+                        item.item.prices[currency].currency
+                      )} ${item.item.prices[currency].amount}`}</ProductPrice>
+                      <Attributes
+                        item={item.item}
+                        Container={AttributesContainer}
+                        AttLabel={AttributeGroupName}
+                        LabelGroup={AttributeGroup}
+                        chosenAttributes={item.savedAttribute}
+                        Button={AttributeButton}
+                        handleClick={this.saveAttribute}
+                        itemID={id}
+                      />
+                    </CartItemDetailsContainer>
+                    <CartItemActionsContainer>
+                      <CartCountButton
+                        value={item}
+                        onClick={() => this.handleIncrease({ item })}
+                      >
+                        +
+                      </CartCountButton>
+                      <h3>{item.quantity}</h3>
+                      <CartCountButton
+                        value={item}
+                        onClick={() => this.handleRemove({ item })}
+                      >
+                        -
+                      </CartCountButton>
+                    </CartItemActionsContainer>
 
-                </CartItemDetailsContainer>
-              <CartItemActionsContainer>
-                <CartCountButton value={item} onClick={()=>this.handleIncrease({item})}>+</CartCountButton>
-                  <h3>{item.quantity}</h3>
-                <CartCountButton value={item} onClick={()=>this.handleRemove({item})}>-</CartCountButton>
-                </CartItemActionsContainer>
-
-                <CartGallery images={item.item.gallery} />
-              </CartItemContainer>
-</div>
-            </>
-          ))}
-          </CartContainer>
+                    <CartGallery images={item.item.gallery} />
+                  </CartItemContainer>
+                </div>
+              </>
+            ))}
+        </CartContainer>
       </>
     );
   }
@@ -117,9 +122,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  remove:(state)=>dispatch(removeFromCart(state)),
+  remove: (state) => dispatch(removeFromCart(state)),
   send: (state) => dispatch(addToCart(state)),
-  change: (attr,id) => dispatch(changeAttribute(attr,id)),
-})
+  change: (attr, id) => dispatch(changeAttribute(attr, id)),
+});
 
-export default connect(mapStateToProps,mapDispatchToProps)(CartDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(CartDetails);

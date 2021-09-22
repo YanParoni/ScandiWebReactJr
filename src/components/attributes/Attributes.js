@@ -16,13 +16,8 @@ export default class Attributes extends PureComponent {
   );
 }
 
- 
-  
-
   render() {
     const { Container, AttLabel, LabelGroup, item, handleClick, Button, itemID } = this.props;
-
-
     return (
       <Container>
         {item.attributes && item.attributes.map((typeAtt, index) => {

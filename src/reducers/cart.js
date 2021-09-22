@@ -19,7 +19,6 @@ const INITIAL_STATE = {
   currentItem: [],
   index: 0,
   currency: 0,
-  sla:cart
 };
 
 function cart(state = INITIAL_STATE, action) {
@@ -39,7 +38,6 @@ function cart(state = INITIAL_STATE, action) {
       return {
         ...state,
         cart:addItemToCart(state.cart, action.state),     
-        sla: addItemToCart(state.cart, action.state),     
       };
     case REMOVE_FROM_CART:
       return {
@@ -62,7 +60,6 @@ function cart(state = INITIAL_STATE, action) {
         currentItem: action.payload,
       };
     case SEND_CATEGORY:
-      console.log(action.payload);
       return {
         ...state,
         category: action.state,

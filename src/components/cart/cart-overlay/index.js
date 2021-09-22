@@ -26,7 +26,7 @@ class CartOverlay extends React.PureComponent {
 
   handleLeave() {
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => this.setModal(false), 5000);
+    this.timeout = setTimeout(() => this.setModal(false), 1000);
   }
 
   handleMouseOver() {
@@ -46,16 +46,16 @@ class CartOverlay extends React.PureComponent {
   render() {
     const { cart } = this.props;
     const cartItemCount = this.totalItemCount(cart);
-    console.log(cartItemCount);
     return (
       <div style={{ position: "relative" }}>
-        <CartItemCountShape>
-          <CartItemCountContent>{cartItemCount}</CartItemCountContent>
-        </CartItemCountShape>
         <CartIconContainer
           onMouseOver={this.handleMouseOver}
           onMouseLeave={this.handleLeave}
         >
+          <CartItemCountShape>
+            <CartItemCountContent>{cartItemCount}</CartItemCountContent>
+          </CartItemCountShape>
+
           <CartLink to="/cart">
             <CartIcon />
           </CartLink>

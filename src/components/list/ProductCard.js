@@ -16,7 +16,7 @@ import {
 } from "./list-style";
 
 import getSymbolFromCurrency from "currency-symbol-map";
-import { loadCurrentItem, sendProducts } from "../../actions";
+import { loadCurrentItem, sendProducts,addToCart } from "../../actions";
 
 class ProductCard extends Component {
   constructor(props) {
@@ -36,7 +36,14 @@ class ProductCard extends Component {
 
   addToCart(item){
     const { add } = this.props;
-    add(item)
+    let selectAttribute;
+    const format = item.attributes.map((attr)=> {
+      const { items, type, id, name } = attr;
+      const item=items.find(attr =>selectAttribute={item:attr}) 
+      return attr= {item,type,id,name}
+    })
+    const newItem = Object.assign({}, {item}, { savedAttribute: format }); 
+    add(newItem)
   }
 
   render() {
@@ -67,7 +74,7 @@ class ProductCard extends Component {
                 </ProductImageContainer>
               </Btn>
             </StyledLink>
-            {this.state.hover && item.inStock && <BtnCart  />}
+            {this.state.hover && item.inStock && <BtnCart onClick={()=>this.addToCart(item)}  />}
             {!item.inStock && (
               <OutOfStockOverlay>
                 <OutOfStockText>out of stock</OutOfStockText>
@@ -84,7 +91,7 @@ class ProductCard extends Component {
 }
 const mapDispatchToProps = (dispatch) => ({
   sendItem: (item) => dispatch(loadCurrentItem(item)),
-  add:(item)=> dispatch(sendProducts(item))
+  add:(item)=> dispatch(addToCart(item))
 });
 
 export default connect(null, mapDispatchToProps)(ProductCard);

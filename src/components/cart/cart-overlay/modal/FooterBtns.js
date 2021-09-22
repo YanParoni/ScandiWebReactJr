@@ -1,14 +1,14 @@
 import React, { PureComponent } from "react";
 import { ModalFooterContainer, ViewBagButton, CheckOutButton } from "./modal.styles";
-
+import {Link} from 'react-router-dom'
 
 export default class FooterButtons extends PureComponent {
     render() {
         return (
             <ModalFooterContainer>
-                <div to="/cart">
+                <Link to="/cart">
                     <ViewBagButton>view bag</ViewBagButton>
-                </div>
+                </Link>
                 <CheckOutButton>check out</CheckOutButton>
             </ModalFooterContainer>
         );

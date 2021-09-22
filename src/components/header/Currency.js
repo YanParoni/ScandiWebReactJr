@@ -45,7 +45,6 @@ class Currency extends Component {
     const result = await client.query({
       query: getCurrencies,
     });
-    console.log(result);
     document.addEventListener('click', this.handleOutsideClick);
     this.setState({ currencies: result.data.currencies });
   }

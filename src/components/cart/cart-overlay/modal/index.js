@@ -4,21 +4,23 @@ import Attributes from "../../../attributes/Attributes";
 import FooterBtns from "./FooterBtns";
 import TotalPrice from "./TotalPrice";
 import {
-  ModalContainer,
-  CartName,
-  ItemCount,
   ItemContainer,
   NameAndPrice,
   Actions,
   ImageContainer,
   ItemName,
-  ItemNameLink,
+  ItemNumbers,
+  ItemPrice,
+  ItemCount,
   ItemImage,
+  ModalContainer,
   CountControl,
   AttributesContainer,
   AttributeGroup,
   AttrButton,
   AttributeGroupName,
+  ItemNameLink,
+  CartName,
 } from "./modal.styles";
 import {
   removeFromCart,
@@ -51,7 +53,7 @@ class CartModal extends PureComponent {
   getTotalPrice(cart) {
     const { selectedCurr } = this.props;
     const totalPrice = cart.reduce((total, curr) => {
-      const price = curr.item.prices[selectedCurr].amount;
+      const price = curr.item.prices[selectedCurr].amount * curr.quantity;
       return (total += price);
     }, 0);
     return Math.round(totalPrice * 100) / 100;
@@ -78,16 +80,28 @@ class CartModal extends PureComponent {
             &nbsp;
             <ItemCount>{Object.keys(cart).length} items</ItemCount>
           </div>
-          {cart &&
+          {cart !==undefined &&
             cart.map((item, id) => (
               <ItemContainer key={id}>
-                {console.log(item)}
-                <ItemNameLink
-                  to={`/product/${item.item.name}`}
-                  onClick={() => this.props.setModal(false)}
-                >
-                  <ItemName>{item.item.name}</ItemName>
-                </ItemNameLink>
+                <NameAndPrice>
+                  <ItemNameLink
+                    to={`/product/${item.item.name}`}
+                    onClick={() => this.props.setModal(false)}
+                  >
+                    <ItemNumbers>{item.item.name} </ItemNumbers>
+                    <ItemPrice>{item.item.prices[0].amount}</ItemPrice>
+                  </ItemNameLink>
+                </NameAndPrice>
+                <Attributes
+                  item={item.item}
+                  Container={AttributesContainer}
+                  AttLabel={AttributeGroupName}
+                  LabelGroup={AttributeGroup}
+                  chosenAttributes={item.savedAttribute}
+                  Button={AttrButton}
+                  handleClick={this.saveAttribute}
+                  itemID={id}
+                />
                 <Actions>
                   <CountControl onClick={() => this.handleIncrease({ item })}>
                     +
@@ -99,19 +113,10 @@ class CartModal extends PureComponent {
                 <ImageContainer>
                   <ItemImage src={item.item.gallery[0]} />
                 </ImageContainer>
-                <Attributes
-                  item={item.item}
-                  Container={AttributesContainer}
-                  AttLabel={AttributeGroupName}
-                  LabelGroup={AttributeGroup}
-                  chosenAttributes={item.savedAttribute}
-                  Button={AttrButton}
-                  handleClick={this.saveAttribute}
-                  itemID={id}
-                />
-                <TotalPrice item={item.item}totalPrice={Math.round(total * 100) / 100} />
               </ItemContainer>
             ))}
+          <TotalPrice totalPrice={Math.round(total * 100) / 100} />
+
           <FooterBtns />
         </ModalContainer>
       </>
