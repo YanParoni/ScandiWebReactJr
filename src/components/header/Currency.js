@@ -16,35 +16,37 @@ class Currency extends Component {
       currencies: [],
       showModal: false,
     };
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  handleOutsideClick = (e) => {
-    if (this.node.contains(e.target)) {
-      this.setState({ showOptions: false });
-    }
-  };
+  closeModal = () => {
+    this.setState({ showModal: false });
+    document.removeEventListener("click", this.closeModal);
+   };
 
   componentDidMount() {
     this.fetchCurrency();
-    document.addEventListener("click", this.handleOutsideClick);
+    document.addEventListener("click", this.closeModal);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleOutsideClick);
+    document.removeEventListener("click", this.closeModal);
   }
 
-  toggleModal() {
-    this.setState((prevState) => ({
-      showModal: !prevState.showModal,
-    }));
-  }
+  handleClick = e => {
+    if (this.state.showModal) {
+      this.closeModal();
+      return;
+    }
+    this.setState({ showModal: true });
+    e.stopPropagation();
+    document.addEventListener("click", this.closeModal);
+  };
 
   async fetchCurrency() {
     const result = await client.query({
       query: getCurrencies,
     });
-    document.addEventListener("click", this.handleOutsideClick);
+    document.addEventListener("click", this.closeModal);
     this.setState({ currencies: result.data.currencies });
   }
 
@@ -52,16 +54,13 @@ class Currency extends Component {
     const { sendCurrency, selected } = this.props;
     return (
       <CurrencySelect
-        ref={(node) => {
-          this.node = node;
-        }}
-        onClick={this.toggleModal}
+      
+        onClick={this.handleClick}
         active={this.state.showOptions}
       >
         <span>
-          {" "}
           {`${getSymbolFromCurrency(this.state.currencies[selected])}`}
-          {this.state.showModal ? <DownArrow /> : <UpArrow />}
+          {this.state.showModal ? <UpArrow /> : <DownArrow />}
         </span>
         <div id="options">
           {this.state.showModal &&

@@ -30,23 +30,32 @@ export const CurrencySelect = styled.div`
   cursor: pointer;
   user-select: none;
   margin: 10px;
+  cursor: pointer;
+    user-select: none;
   #options {
     display: flex;
-    flex-direction: column;
-    width: 8vw;
-    padding: 20px 2vw 20px 1vw;
-    gap: 10px;
-    position: absolute;
-    top: 50px;
+        flex-direction: column;
+        width: 8vw;
+        padding: 20px 2vw 20px 1vw;
+        gap: 10px;
+        position: absolute;
+        left: -2vw;
+        top: 50px;
+        margin-right:10px;
+    box-shadow: 0px 4px 35px 0px #A8ACB030;
+    span {
+    display: block;
+  }
+  span:hover{
+    color:#5ECE7B;
+  }
   }
   svg {
     width: 10px;
     height: 10px;
     margin-left: 10px;
   }
-  span {
-    display: block;
-  }
+ 
 `;
 
 export const CurrencyIn = styled.span`
