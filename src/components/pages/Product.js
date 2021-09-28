@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import Attributes from "../attributes/Attributes";
 import Navbar from "../../components/header/Navbar";
@@ -22,17 +22,17 @@ import { addToCart } from "../../actions";
 import Gallery from "../attributes/Gallery";
 import DOMPurify from "dompurify";
 
-class Product extends Component {
+class Product extends PureComponent {
   constructor(props) {
     super(props);
     this.getProduct = this.getProduct.bind(this);
     this.saveAttribute = this.saveAttribute.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.makeActive = this.makeActive.bind(this);
-
+    this.mapProduct = this.mapProduct.bind(this);
     this.state = {
       item: {},
-      chosenImage: this.props.product.gallery[0],
+      chosenImage: [],
       savedAttributes: [],
       prices: [],
     };
@@ -40,18 +40,28 @@ class Product extends Component {
 
   componentDidMount() {
     this.getProduct();
-    this.setState((prevState) => {
-      const emptyAttrs = this.props.product.attributes.map((i) => {
-        return {
-          id: i.id,
-          name: i.name,
-          type: i.type,
-          item: null,
-        };
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.item !== this.state.item || this.state.item === undefined) {
+      this.getProduct();
+    }
+  }
+
+  async mapProduct() {
+    if (this.state.item !== undefined) {
+      this.setState((prevState) => {
+        const emptyAttrs = this.state.item.attributes.map((i) => {
+          return {
+            id: i.id,
+            name: i.name,
+            type: i.type,
+            item: null,
+          };
+        });
+        return { ...prevState, savedAttributes: emptyAttrs };
       });
-      return { ...prevState, savedAttributes: emptyAttrs };
-    });
-    this.setState({ showImage: this.props.product.gallery[0] });
+      this.setState({ chosenImage: this.state.item.gallery[0] });
+    }
   }
 
   handleAddToCart() {
@@ -67,7 +77,6 @@ class Product extends Component {
       alert("Please select the attributes of your item =)");
     }
   }
-
   saveAttribute({ attr }) {
     const attributes = this.state.savedAttributes.map((i) => {
       if (i.id === attr.id) {
@@ -82,8 +91,15 @@ class Product extends Component {
   }
 
   async getProduct() {
-    const { product } = this.props;
-    this.setState({ item: product });
+    const {
+      match: {
+        params: { id },
+      },
+      products,
+    } = this.props;
+    const merda = await products.find((i) => i.name === id);
+    this.setState({ item: merda });
+    return this.mapProduct();
   }
 
   makeActive(img) {
@@ -93,21 +109,21 @@ class Product extends Component {
   }
 
   render() {
-    const { savedAttributes } = this.state;
-    const { currency, product } = this.props;
+    const { savedAttributes, item } = this.state;
+    const { currency } = this.props;
     return (
       <>
         <Navbar />
         <ProductContainer>
-          {product && (
+          {item && item.gallery && (
             <>
-              <Gallery images={product.gallery} change={this.makeActive} />
+            <Gallery images={item.gallery} change={this.makeActive} />
               <ProductImage src={this.state.chosenImage} />
               <DetailsContainer>
-                <ProductBrand>{product.brand}</ProductBrand>
-                <ProductName>{product.name}</ProductName>
+                <ProductBrand>{item.brand}</ProductBrand>
+                <ProductName>{item.name}</ProductName>
                 <Attributes
-                  item={product}
+                  item={item}
                   Container={AttributesContainer}
                   AttLabel={AttributeGroupName}
                   LabelGroup={AttributeGroup}
@@ -117,24 +133,24 @@ class Product extends Component {
                 />
                 <ProductPriceLabel>PRICE:</ProductPriceLabel>
                 <ProductPrice>
-                  {product.prices && (
+                  {item.prices && (
                     <>
                       {" "}
                       {`${getSymbolFromCurrency(
-                        product.prices[currency].currency
-                      )}${product.prices[currency].amount}`}
+                        item.prices[currency].currency
+                      )}${item.prices[currency].amount}`}
                     </>
                   )}
                 </ProductPrice>
                 <Button
                   onClick={() => this.handleAddToCart()}
-                  inStock={product.inStock}
+                  inStock={item.inStock}
                 >
-                  {product.inStock ? "add to cart" : "out of stock"}
+                  {item.inStock ? "add to cart" : "out of stock"}
                 </Button>
                 <Description
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(product.description),
+                    __html: DOMPurify.sanitize(item.description),
                   }}
                 ></Description>
               </DetailsContainer>
@@ -147,7 +163,7 @@ class Product extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  product: state.cart.currentItem,
+  products: state.cart.products,
   currency: state.cart.currency,
   cart: state.cart.cart,
 });

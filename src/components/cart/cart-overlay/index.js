@@ -14,27 +14,30 @@ class CartOverlay extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { showModal: false };
-    this.handleLeave = this.handleLeave.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.setModal = this.setModal.bind(this);
-    this.timeout = null;
   }
 
-  setModal(bool) {
-    this.setState({ showModal: bool });
+  closeModal = () => {
+    this.setState({ showModal: false });
+    document.removeEventListener("click", this.closeModal);
+  };
+
+  componentDidMount() {
+    document.addEventListener("click", this.closeModal);
   }
 
-  handleLeave() {
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => this.setModal(false), 500);
+  componentWillUnmount() {
+    document.removeEventListener("click", this.closeModal);
   }
 
-  handleMouseOver() {
-    clearTimeout(this.timeout);
-    if (this.state.showModal !== true) {
-      this.setModal(true);
+  handleClick = (e) => {
+    if (this.state.showModal) {
+      this.closeModal();
+      return;
     }
-  }
+    this.setState({ showModal: true });
+    e.stopPropagation();
+    document.addEventListener("click", this.closeModal);
+  };
 
   totalItemCount(cart) {
     return Object.values(cart).reduce((total, curr) => {
@@ -48,17 +51,12 @@ class CartOverlay extends React.PureComponent {
     const cartItemCount = this.totalItemCount(cart);
     return (
       <div style={{ position: "relative" }}>
-        <CartIconContainer
-          onMouseOver={this.handleMouseOver}
-          onMouseLeave={this.handleLeave}
-        >
+        <CartIconContainer>
           <CartItemCountShape>
             <CartItemCountContent>{cartItemCount}</CartItemCountContent>
           </CartItemCountShape>
 
-          <CartLink to="/cart">
-            <CartIcon />
-          </CartLink>
+          <CartIcon onClick={this.handleClick} />
           {this.state.showModal && (
             <CartModal
               onMouseLeave={this.handleLeave}

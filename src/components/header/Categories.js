@@ -34,8 +34,8 @@ class Categories extends Component {
     const result = await client.query({
       query: getItemsByCategory,
       variables: {
-        title: this.state.category,
-      },
+        title: this.state.category === "all" ? "" : this.statecategory
+      },fetchPolicy: "cache-first",
       refetchQueries: [
         {
           query: getItemsByCategory,

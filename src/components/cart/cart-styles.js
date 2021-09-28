@@ -152,6 +152,7 @@ export const CartIconContainer = styled.div`
   align-items: center;
   height: 80px;
   position: relative;
+  margin-left:38px;
   svg {
     width: 20px;
   }
