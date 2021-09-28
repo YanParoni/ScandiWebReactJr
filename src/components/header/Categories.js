@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import { StyledLink } from "../list/list-style";
 import {
   getAllProducts,
   getCategories,
-  getItemsByCategory,
 } from "../../Graphql/queries";
 import client from "../../Graphql/apolloClient";
 import { connect } from "react-redux";
@@ -13,7 +13,7 @@ class Categories extends Component {
   constructor() {
     super();
     this.fetchQuery = this.fetchQuery.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
+    this.getSome = this.getSome.bind(this);
     this.state = {
       category: "",
       categories: [],
@@ -24,33 +24,23 @@ class Categories extends Component {
     this.fetchQuery();
   }
 
-  componentDidUpdate(_prevProps, prevState) {
-    if (prevState.category !== this.state.category) {
-      this.fetchProducts();
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.category !== this.props.category) {
+      this.fetchQuery();
     }
   }
-  async fetchProducts() {
-    const { sendProducts } = this.props;
-    const result = await client.query({
-      query: getItemsByCategory,
-      variables: {
-        title: this.state.category === "all" ? "" : this.statecategory
-      },fetchPolicy: "cache-first",
-      refetchQueries: [
-        {
-          query: getItemsByCategory,
-          variables: {
-            title: this.state.category,
-          },
-        },
-      ],
-    });
-    this.setState({ products: result.data.category.products });
-    sendProducts(this.state.products);
+
+  getSome(event) {
+    const {  sendCategory } = this.props;
+    console.log(event.target.textContent);
+    this.setState({ category: event.target.textContent });
+    sendCategory(event.target.textContent);
+
+    this.fetchQuery();
   }
 
   async fetchQuery() {
-    const { sendProducts, sendCategory } = this.props;
+    const { sendProducts } = this.props;
     const result = await client.query({
       query: getCategories,
     });
@@ -58,35 +48,29 @@ class Categories extends Component {
       query: getAllProducts,
     });
     this.setState({ products: cu.data.category.products });
-
     this.setState({ categories: [...result.data.categories] });
     sendProducts(this.state.products);
-    sendCategory("ALL");
   }
   render() {
-    const { sendCategory } = this.props;
     return (
       <Container>
-        <BttonCat
-          onClick={() => this.setState({ category: "" })}
-          type="submit"
-          value="all"
-        >
-          <Item>All</Item>
-        </BttonCat>
+        <StyledLink to={"/category/all"}>
+          <BttonCat onClick={this.getSome} type="submit" value="all">
+            <Item>All</Item>
+          </BttonCat>
+        </StyledLink>
         {this.state.categories &&
           this.state.categories.map(({ name }, id) => (
-            <BttonCat
-              key={id}
-              type="submit"
-              onClick={() => {
-                this.setState({ category: name });
-                sendCategory(name);
-              }}
-              value={name}
-            >
-              <Item>{name}</Item>
-            </BttonCat>
+            <StyledLink to={`/category/${name}`}>
+              <BttonCat
+                key={id}
+                type="submit"
+                onClick={this.getSome}
+                value={name}
+              >
+                <Item>{name}</Item>
+              </BttonCat>
+            </StyledLink>
           ))}
       </Container>
     );
