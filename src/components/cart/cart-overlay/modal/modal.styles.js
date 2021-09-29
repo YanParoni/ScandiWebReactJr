@@ -20,10 +20,10 @@ export const ModalFooterContainer = styled.div`
 `;
 
 export const CartName = styled.span`
-  font-family: Raleway;
+font-family: Raleway;
+font-style: normal;
+font-weight: bold;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
   line-height: 26px;
   letter-spacing: 0em;
   text-align: right;
@@ -66,6 +66,7 @@ export const ViewBagButton = styled(ButtonCommon)`
   border: 1px solid #1d1f22;
   color: #1d1f22;
   margin-right: 0.8vw;
+  text-decoration:none;
 `;
 
 export const CheckOutButton = styled(ButtonCommon)`
@@ -102,15 +103,13 @@ export const AttributeGroupName = styled.span`
 `;
 
 export const AttrButton = styled.button`
+ background-color: ${(props) =>
+    !props.inStock || !props.active && "#fff" };
   background-color: ${(props) =>
-    !props.active
-      ? "var(--disabledAttr)"
-      : props.bgColor
-      ? props.bgColor
-      : "#fff"};
+    props.backgroundColor ? props.backgroundColor : ""};
   border: 1px solid
-    ${(props) => (props.active ? "#1D1F22" : "var(--disabledAttr)")};
-  color: ${(props) => (props.active ? "#1D1F22" : "var(--disabledAttr)")};
+    ${(props) => (props.active ? "#1D1F22" : "gray")};
+  color: ${(props) => (props.active ? "#1D1F22" : "gray")};
   min-width: 1.6vw;
   height: 24px;
   margin: 0 8px 4px 0;

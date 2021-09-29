@@ -72,8 +72,17 @@ class CartModal extends PureComponent {
     send(item);
   }
 
+  totalItemCount(cart) {
+    return Object.values(cart).reduce((total, curr) => {
+      total += curr.quantity;
+      return total;
+    }, 0);
+  }
+
+
   render() {
-    const { cart } = this.props;
+    const { cart,closeModal } = this.props;
+    const totalItems = this.totalItemCount(cart)
     const total = this.getTotalPrice(cart);
     return (
       <>
@@ -81,7 +90,7 @@ class CartModal extends PureComponent {
           <div>
             <CartName>My Bag,</CartName>
             &nbsp;
-            <ItemCount>{Object.keys(cart).length} items</ItemCount>
+            <ItemCount>{totalItems} items</ItemCount>
           </div>
           {cart !== undefined &&
             cart.map((item, id) => (
@@ -119,7 +128,7 @@ class CartModal extends PureComponent {
             ))}
           <TotalPrice totalPrice={Math.round(total * 100) / 100} />
 
-          <FooterBtns />
+          <FooterBtns closeModal={closeModal}  />
         </ModalContainer>
       </>
     );

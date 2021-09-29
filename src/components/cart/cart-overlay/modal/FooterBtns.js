@@ -11,7 +11,7 @@ export default class FooterButtons extends PureComponent {
     return (
       <ModalFooterContainer>
         <Link to="/cart">
-          <ViewBagButton>view bag</ViewBagButton>
+          <ViewBagButton onClick={this.props.closeModal}>view bag</ViewBagButton>
         </Link>
         <CheckOutButton>check out</CheckOutButton>
       </ModalFooterContainer>

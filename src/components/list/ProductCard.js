@@ -71,7 +71,7 @@ class ProductCard extends Component {
                   ></ProductImage>
                 </ProductImageContainer>
               </Btn>
-            </StyledLink>
+           
             {this.state.hover && item.inStock && (
               <BtnCart onClick={() => this.addToCart(item)} />
             )}
@@ -80,6 +80,7 @@ class ProductCard extends Component {
                 <OutOfStockText>out of stock</OutOfStockText>
               </OutOfStockOverlay>
             )}
+            </StyledLink>
           </ItemTop>
           <ItemName>{item.name}</ItemName>
           <ItemPrice>{`${getSymbolFromCurrency(prices)}${amount}`}</ItemPrice>

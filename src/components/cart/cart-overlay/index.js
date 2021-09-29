@@ -53,7 +53,7 @@ class CartOverlay extends React.PureComponent {
 
           <CartIcon onClick={this.handleClick} />
           {this.state.showModal && (
-            <CartModal 
+            <CartModal closeModal={()=>this.handleClick()}
             />
           )}
         </CartIconContainer>

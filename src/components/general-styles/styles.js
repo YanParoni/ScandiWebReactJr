@@ -16,6 +16,7 @@ export const AttributeGroup = styled.div`
   display: flex;
   gap: 0.833vw;
   margin-bottom: 8px;
+  font-family:Source Sans Pro
 `;
 export const DetailsContainer = styled.div`
   display: flex;
@@ -29,20 +30,12 @@ export const AttributeButton = styled.button`
     props.backgroundColor ? props.backgroundColor : ""};
   min-width: 63px;
   height: 45px;
-  border: ${(props) =>
-    !props.inStock
-      ? "1px solid var(--disabled)"
-      : props.error
-      ? "2px solid var(--error)"
-      : props.backgroundColor && props.active
-      ? "3px solid #1D1F22"
-      : "1px solid #1D1F22"};
   font-size: 16px;
   line-height: 18px;
   font-weight: 400;
   font-family: "Source Sans Pro", sans-serif;
   color: ${(props) =>
-    !props.inStock ? "var(--disabled)" : props.active ? "#fff" : "#292929"};
+    !props.inStock ? "gray" : props.active ? "#fff" : "#292929"};
 `;
 
 export const Button = styled.button`
@@ -104,7 +97,7 @@ export const ProductPrice = styled.span`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -126,5 +119,5 @@ export const ProductContainer = styled.div`
 `;
 
 export const Description = styled.div`
-  font-family: Roboto;
+  font-family: "Roboto";
 `;
