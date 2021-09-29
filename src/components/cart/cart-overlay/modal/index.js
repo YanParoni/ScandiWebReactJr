@@ -89,7 +89,6 @@ class CartModal extends PureComponent {
                 <NameAndPrice>
                   <ItemNameLink
                     to={`/product/${item.item.name}`}
-                    onClick={() => this.props.setModal(false)}
                   >
                     <ItemName>{item.item.name} </ItemName>
                     <ItemName>{item.item.prices[0].amount}</ItemName>

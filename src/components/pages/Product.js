@@ -21,6 +21,8 @@ import {
 import { addToCart } from "../../actions";
 import Gallery from "../attributes/Gallery";
 import DOMPurify from "dompurify";
+import client from "../../Graphql/apolloClient";
+import { getItemsById } from "../../Graphql/queries";
 
 class Product extends PureComponent {
   constructor(props) {
@@ -41,14 +43,9 @@ class Product extends PureComponent {
   componentDidMount() {
     this.getProduct();
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.item !== this.state.item || this.state.item === undefined) {
-      this.getProduct();
-    }
-  }
 
-  async mapProduct() {
-    if (this.state.item !== undefined) {
+  mapProduct() {
+    if (this.state.item) {
       this.setState((prevState) => {
         const emptyAttrs = this.state.item.attributes.map((i) => {
           return {
@@ -77,6 +74,7 @@ class Product extends PureComponent {
       alert("Please select the attributes of your item =)");
     }
   }
+
   saveAttribute({ attr }) {
     const attributes = this.state.savedAttributes.map((i) => {
       if (i.id === attr.id) {
@@ -95,11 +93,15 @@ class Product extends PureComponent {
       match: {
         params: { id },
       },
-      products,
     } = this.props;
-    const merda = await products.find((i) => i.name === id);
-    this.setState({ item: merda });
-    return this.mapProduct();
+    const response = await client.query({
+      query: getItemsById,
+      variables: {
+        id: id,
+      },
+    });
+    this.setState({ item: response.data.product });
+    this.mapProduct();
   }
 
   makeActive(img) {
@@ -117,7 +119,7 @@ class Product extends PureComponent {
         <ProductContainer>
           {item && item.gallery && (
             <>
-            <Gallery images={item.gallery} change={this.makeActive} />
+              <Gallery images={item.gallery} change={this.makeActive} />
               <ProductImage src={this.state.chosenImage} />
               <DetailsContainer>
                 <ProductBrand>{item.brand}</ProductBrand>
@@ -135,7 +137,6 @@ class Product extends PureComponent {
                 <ProductPrice>
                   {item.prices && (
                     <>
-                      {" "}
                       {`${getSymbolFromCurrency(
                         item.prices[currency].currency
                       )}${item.prices[currency].amount}`}
