@@ -93,13 +93,7 @@ export const AttributeGroup = styled.div`
 `;
 
 export const AttributeGroupName = styled.span`
-  display: block;
-  font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
-  font-size: 14px;
-  line-height: 14px;
-  font-weight: 400;
-  margin-bottom: 5px;
+  visibility:hidden;
 `;
 
 export const AttrButton = styled.button`
@@ -107,9 +101,10 @@ export const AttrButton = styled.button`
     !props.inStock || !props.active && "#fff" };
   background-color: ${(props) =>
     props.backgroundColor ? props.backgroundColor : ""};
-  border: 1px solid
-    ${(props) => (props.active ? "#1D1F22" : "gray")};
-  color: ${(props) => (props.active ? "#1D1F22" : "gray")};
+  border: 2px solid
+    ${(props) => (props.active ? "green" : "gray")};
+  color: ${(props) => (props.active ? "green" : "gray")};
+
   min-width: 1.6vw;
   height: 24px;
   margin: 0 8px 4px 0;

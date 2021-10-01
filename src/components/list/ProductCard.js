@@ -35,13 +35,19 @@ class ProductCard extends Component {
 
   addToCart(item) {
     const { add } = this.props;
-    const format = item.attributes.map((attr) => {
-      const { items, type, id, name } = attr;
-      const item = items.find((attr) => ({ item: attr }));
-      return (attr = { item, type, id, name });
-    });
-    const newItem = Object.assign({}, { item }, { savedAttribute: format });
-    add(newItem);
+    const { attributes } = item;
+    if (attributes.length > 0) {
+      const format = attributes.map((attr) => {
+        const { items, type, id, name } = attr;
+        const item = items.find((attr) => ({ item: attr }));
+        return (attr = { item, type, id, name });
+      });
+      const newItem = Object.assign({}, { item }, { savedAttribute: format });
+      add(newItem);
+    } else {
+      const newItem = Object.assign({}, { item: item });
+      add(newItem);
+    }
   }
 
   render() {

@@ -4,7 +4,8 @@ import { ProductsContainer, Title } from "./list-style";
 import ProductCard from "./ProductCard";
 import client from "../../Graphql/apolloClient";
 import { sendProducts } from "../../actions";
-import { getItemsByCategory } from "../../Graphql/queries";
+import { getItemsByCategory,  getAllProducts,
+  getCategories, } from "../../Graphql/queries";
 
 class ProductList extends Component {
   constructor() {
@@ -28,6 +29,12 @@ class ProductList extends Component {
   mouseOn() {
     this.setState({ hover: true });
   }
+  async fetchAllProducts(){
+    const cu = await client.query({
+      query: getAllProducts,
+    });
+    this.setState({ products: cu.data.category.products });
+  }
 
   async fetchProducts() {
     const { sendProducts } = this.props;
@@ -40,6 +47,7 @@ class ProductList extends Component {
     this.setState({ products: result.data.category.products });
     sendProducts(result.data.category.products);
   }
+
   mouseOff() {
     this.setState({ hover: false });
   }

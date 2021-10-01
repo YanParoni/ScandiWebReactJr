@@ -40,16 +40,11 @@ class Categories extends Component {
   }
 
   async fetchQuery() {
-    const { sendProducts } = this.props;
     const result = await client.query({
       query: getCategories,
     });
-    const cu = await client.query({
-      query: getAllProducts,
-    });
-    this.setState({ products: cu.data.category.products });
+   
     this.setState({ categories: [...result.data.categories] });
-    sendProducts(this.state.products);
   }
   render() {
     return (

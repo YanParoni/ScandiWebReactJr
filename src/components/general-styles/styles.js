@@ -3,13 +3,7 @@ import styled from "styled-components";
 export const AttributesContainer = styled.div``;
 
 export const AttributeGroupName = styled.span`
-  display: block;
-  font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
-  font-size: 18px;
-  line-height: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
+visibility:hidden;
 `;
 
 export const AttributeGroup = styled.div`

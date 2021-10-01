@@ -164,7 +164,6 @@ class Product extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.cart.products,
   currency: state.cart.currency,
   cart: state.cart.cart,
 });

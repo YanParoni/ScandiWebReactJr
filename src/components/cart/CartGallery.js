@@ -40,13 +40,17 @@ class CartGallery extends Component {
     const { imageIndex } = this.state;
     return (
       <CartItemImageContainer>
+      {images.length > 1 &&
         <CartArrowPrevious onClick={this.previousImage}>
           <Before />
         </CartArrowPrevious>
+        }
         <img src={images[imageIndex]} alt="item" />
+        {images.length > 1 &&
         <CartArrowNext onClick={this.nextImage}>
           <After />
         </CartArrowNext>
+      }
       </CartItemImageContainer>
     );
   }

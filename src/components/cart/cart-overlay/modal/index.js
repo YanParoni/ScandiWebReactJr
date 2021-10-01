@@ -104,6 +104,7 @@ class CartModal extends PureComponent {
                   </ItemNameLink>
                 </NameAndPrice>
                 <Attributes
+                  
                   item={item.item}
                   Container={AttributesContainer}
                   AttLabel={AttributeGroupName}
@@ -117,6 +118,7 @@ class CartModal extends PureComponent {
                   <CountControl onClick={() => this.handleIncrease({ item })}>
                     +
                   </CountControl>
+                  {item.quantity}
                   <CountControl onClick={() => this.handleRemove({ item })}>
                     -
                   </CountControl>

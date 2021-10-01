@@ -72,7 +72,7 @@ class CartDetails extends PureComponent {
               <>
                 <div key={id}>
                   <CartItemContainer key={id}>
-                    <CartItemDetailsContainer >
+                    <CartItemDetailsContainer>
                       <ItemNameLink to={`/product/${item.item.id}`}>
                         <CartItemName>{item.item.name}</CartItemName>
                       </ItemNameLink>
