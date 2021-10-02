@@ -1,5 +1,4 @@
 export const addItemToCart = (cartItems, cartItemToAdd) => {
-  console.log(cartItemToAdd);
   if (cartItemToAdd.savedAttributes) {
     const match = cartItems.find(
       (item) => item.item.name === cartItemToAdd.item.name

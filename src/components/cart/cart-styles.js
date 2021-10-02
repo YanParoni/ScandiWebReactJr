@@ -33,32 +33,36 @@ export const CartItemActionsContainer = styled.div`
   height: 100%;
 `;
 
+export const ProductBrand = styled.h1`
+  font-family: Raleway;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  margin-bottom: 43px;
+`;
+
 export const CartItemName = styled.span`
   display: block;
-  &::first-line {
-    font-weight: 600;
-  }
+  font-family: Raleway;
   font-size: 30px;
-  margin: 20px 0 55px 0;
-  height: 27px;
+  font-style: normal;
   font-weight: 400;
-  color: black;
   line-height: 27px;
+  letter-spacing: 0em;
+  text-align: left;
   &:hover {
     color: #5ece7b;
   }
 `;
 
 export const Title = styled.h1`
-  margin: 0;
-  padding: 0;
-  font-weight: 700;
+  font-family: Raleway;
   font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
   line-height: 40px;
-  height: 40px;
-  text-transform: uppercase;
-  width: 6vw;
-  margin-bottom: 60px;
+  letter-spacing: 0em;
+  text-align: left;
 `;
 
 export const CartLink = styled(NavLink)`
@@ -152,7 +156,7 @@ export const CartIconContainer = styled.div`
   align-items: center;
   height: 80px;
   position: relative;
-  margin-left:38px;
+  margin-left: 38px;
   svg {
     width: 20px;
   }

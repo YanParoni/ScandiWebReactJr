@@ -88,8 +88,8 @@ class ProductCard extends Component {
               <BtnCart onClick={() => this.addToCart(item)} />
             )}
           </ItemTop>
-          <ItemName>{item.name}</ItemName>
-          <ItemPrice>{`${getSymbolFromCurrency(prices)}${amount}`}</ItemPrice>
+          <ItemName>{item.brand} {item.name}</ItemName>
+          <ItemPrice>{`${getSymbolFromCurrency(prices)} ${amount}`}</ItemPrice>
         </ItemContainer>
       </>
     );

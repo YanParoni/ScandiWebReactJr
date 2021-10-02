@@ -69,6 +69,7 @@ export const getItemsByCategory = gql`
       products {
         id
         name
+        brand
         gallery
         inStock
         prices {
@@ -110,6 +111,7 @@ export const getItemsById = gql`
 query getItemsById($id: String!) {
   product(id: $id ) {
     id
+    brand
     name
     gallery
     inStock

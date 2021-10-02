@@ -11,10 +11,7 @@ export const Container = styled.div`
   left: 101px;
   bottom: 0px;
   cursor: pointer;
-  &.active {
-    color: #5ece7b;
-    box-shadow: inset 0 -2px 0 0 #5ece7b;
-  }
+  
 `;
 
 export const BttonCat = styled.button`
@@ -29,6 +26,7 @@ export const BttonCat = styled.button`
   background: transparent;
   border: none !important;
   margin-top: 17px;
+  
 `;
 export const Item = styled.div`
   padding: 4px 1vw 32px 1vw;
@@ -43,13 +41,11 @@ export const Item = styled.div`
   font-weight: normal;
   font-size: 16px;
   line-height: 120%;
-  color: #1d1f22;
+  color: ${(props) =>
+    props.active  ? "green" : "black"};
   &:hover {
     color: #5ece7b;
     box-shadow: inset 0 -2px 0 0 #5ece7b;
   }
-  &:visited {
-    color: #5ece7b;
-    box-shadow: inset 0 -2px 0 0 #5ece7b;
-  }
+
 `;

@@ -10,6 +10,8 @@ import {
   AttributesContainer,
   AttributeButton,
   ProductPrice,
+  ProductBrand
+
 } from "../general-styles/styles";
 import {
   CartItemActionsContainer,
@@ -74,6 +76,7 @@ class CartDetails extends PureComponent {
                   <CartItemContainer key={id}>
                     <CartItemDetailsContainer>
                       <ItemNameLink to={`/product/${item.item.id}`}>
+                      <ProductBrand>{item.item.brand}</ProductBrand>
                         <CartItemName>{item.item.name}</CartItemName>
                       </ItemNameLink>
                       <ProductPrice>{`${getSymbolFromCurrency(

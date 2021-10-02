@@ -5,7 +5,7 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 5rem;
+  top: 4.2rem;
   right: 5px;
   width: 23vw;
   background-color: #fff;
@@ -20,9 +20,9 @@ export const ModalFooterContainer = styled.div`
 `;
 
 export const CartName = styled.span`
-font-family: Raleway;
-font-style: normal;
-font-weight: bold;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
   font-size: 16px;
   line-height: 26px;
   letter-spacing: 0em;
@@ -55,6 +55,8 @@ export const ButtonCommon = styled.button`
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
+  text-decoration: none;
+  decoration: none;
   transition: all 0.5s ease;
   &:active {
     transform: scale(0.95, 0.95);
@@ -66,7 +68,8 @@ export const ViewBagButton = styled(ButtonCommon)`
   border: 1px solid #1d1f22;
   color: #1d1f22;
   margin-right: 0.8vw;
-  text-decoration:none;
+  text-decoration: none;
+  decoration: none;
 `;
 
 export const CheckOutButton = styled(ButtonCommon)`
@@ -93,16 +96,14 @@ export const AttributeGroup = styled.div`
 `;
 
 export const AttributeGroupName = styled.span`
-  visibility:hidden;
+  display: none;
 `;
 
 export const AttrButton = styled.button`
- background-color: ${(props) =>
-    !props.inStock || !props.active && "#fff" };
+  background-color: ${(props) => !props.inStock || (!props.active && "#fff")};
   background-color: ${(props) =>
     props.backgroundColor ? props.backgroundColor : ""};
-  border: 2px solid
-    ${(props) => (props.active ? "green" : "gray")};
+  border: 2px solid ${(props) => (props.active ? "green" : "gray")};
   color: ${(props) => (props.active ? "green" : "gray")};
 
   min-width: 1.6vw;
@@ -174,14 +175,15 @@ export const ItemNumbers = styled.span`
 export const ItemPrice = styled(ItemNumbers)`
   text-align: left;
   margin: 0;
+  text-decoration: none;
+  decoration: none;
 `;
 
 export const ItemImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: 110%;
   float: right;
   grid-area: img;
-  object-fit: contain;
 `;
 
 export const Actions = styled.div`

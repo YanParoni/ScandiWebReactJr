@@ -26,6 +26,7 @@ export const AttributeButton = styled.button`
   height: 45px;
   font-size: 16px;
   line-height: 18px;
+  border: 1px solid #1D1F22;
   font-weight: 400;
   font-family: "Source Sans Pro", sans-serif;
   color: ${(props) =>

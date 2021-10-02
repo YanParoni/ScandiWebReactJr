@@ -19,12 +19,14 @@ import {
   AttributeGroupName,
   ItemNameLink,
   CartName,
+  ItemPrice,
 } from "./modal.styles";
 import {
   removeFromCart,
   addToCart,
   changeAttribute,
 } from "../../../../actions";
+import getSymbolFromCurrency from "currency-symbol-map";
 
 class CartModal extends PureComponent {
   constructor(props) {
@@ -79,10 +81,9 @@ class CartModal extends PureComponent {
     }, 0);
   }
 
-
   render() {
-    const { cart,closeModal } = this.props;
-    const totalItems = this.totalItemCount(cart)
+    const { cart, closeModal,currency } = this.props;
+    const totalItems = this.totalItemCount(cart);
     const total = this.getTotalPrice(cart);
     return (
       <>
@@ -96,15 +97,15 @@ class CartModal extends PureComponent {
             cart.map((item, id) => (
               <ItemContainer key={id}>
                 <NameAndPrice>
-                  <ItemNameLink
-                    to={`/product/${item.item.name}`}
-                  >
+                  <ItemNameLink to={`/product/${item.item.name}`}>
                     <ItemName>{item.item.name} </ItemName>
-                    <ItemName>{item.item.prices[0].amount}</ItemName>
+                   
                   </ItemNameLink>
+                  <ItemPrice>{`${getSymbolFromCurrency(
+              item.item.prices[currency].currency
+            )}${item.item.prices[0].amount}`}</ItemPrice>
                 </NameAndPrice>
                 <Attributes
-                  
                   item={item.item}
                   Container={AttributesContainer}
                   AttLabel={AttributeGroupName}
@@ -130,7 +131,7 @@ class CartModal extends PureComponent {
             ))}
           <TotalPrice totalPrice={Math.round(total * 100) / 100} />
 
-          <FooterBtns closeModal={closeModal}  />
+          <FooterBtns closeModal={closeModal} />
         </ModalContainer>
       </>
     );
@@ -140,6 +141,8 @@ class CartModal extends PureComponent {
 const mapStateToProps = (state) => ({
   cart: state.cart.cart,
   selectedCurr: state.cart.currency,
+  currency: state.cart.currency,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

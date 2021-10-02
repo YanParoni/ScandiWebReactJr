@@ -4,7 +4,6 @@ import {
   CartItemCountShape,
   CartItemCountContent,
   CartIconContainer,
-  CartLink,
 } from "../cart-styles";
 import CartModal from "./modal";
 import Overlay from "./modal/Overlay";

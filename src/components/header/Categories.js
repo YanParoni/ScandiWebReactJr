@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { StyledLink } from "../list/list-style";
-import {
-  getAllProducts,
-  getCategories,
-} from "../../Graphql/queries";
+import { getCategories } from "../../Graphql/queries";
 import client from "../../Graphql/apolloClient";
 import { connect } from "react-redux";
 import { sendCategory, sendProducts } from "../../actions";
-import { Container, Item, BttonCat } from "./styles/style-categories";
+import { Container } from "./styles/style-categories";
 
 class Categories extends Component {
   constructor() {
@@ -31,11 +28,9 @@ class Categories extends Component {
   }
 
   getSome(event) {
-    const {  sendCategory } = this.props;
-    console.log(event.target.textContent);
+    const { sendCategory } = this.props;
     this.setState({ category: event.target.textContent });
     sendCategory(event.target.textContent);
-
     this.fetchQuery();
   }
 
@@ -43,28 +38,37 @@ class Categories extends Component {
     const result = await client.query({
       query: getCategories,
     });
-   
-    this.setState({ categories: [...result.data.categories] });
+
+    this.setState({
+      categories: [...result.data.categories],
+    });
   }
   render() {
     return (
       <Container>
-        <StyledLink to={"/category/all"}>
-          <BttonCat onClick={this.getSome} type="submit" value="all">
-            <Item>All</Item>
-          </BttonCat>
+        <StyledLink
+          to={"/category/all"}
+          onClick={this.getSome}
+          activeStyle={{
+            color: "#5ECE7B",
+            borderBottom: "2px solid #5ECE7B",
+          }}
+          key="all"
+        >
+          All
         </StyledLink>
         {this.state.categories &&
           this.state.categories.map(({ name }, id) => (
-            <StyledLink to={`/category/${name}`}>
-              <BttonCat
-                key={id}
-                type="submit"
-                onClick={this.getSome}
-                value={name}
-              >
-                <Item>{name}</Item>
-              </BttonCat>
+            <StyledLink
+              to={`/category/${name}`}
+              activeStyle={{
+                color: "#5ECE7B",
+                borderBottom: "2px solid #5ECE7B",
+              }}
+              onClick={this.getSome}
+              key={name}
+            >
+              {name}
             </StyledLink>
           ))}
       </Container>

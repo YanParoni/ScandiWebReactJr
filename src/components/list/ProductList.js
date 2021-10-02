@@ -4,8 +4,7 @@ import { ProductsContainer, Title } from "./list-style";
 import ProductCard from "./ProductCard";
 import client from "../../Graphql/apolloClient";
 import { sendProducts } from "../../actions";
-import { getItemsByCategory,  getAllProducts,
-  getCategories, } from "../../Graphql/queries";
+import { getItemsByCategory,  getAllProducts } from "../../Graphql/queries";
 
 class ProductList extends Component {
   constructor() {
