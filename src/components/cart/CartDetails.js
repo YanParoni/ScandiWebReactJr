@@ -73,7 +73,7 @@ class CartDetails extends PureComponent {
             this.props.cart.map((item, id) => (
               <>
                 <div key={id}>
-                  <CartItemContainer key={id}>
+                  <CartItemContainer >
                     <CartItemDetailsContainer>
                       <ItemNameLink to={`/product/${item.item.id}`}>
                       <ProductBrand>{item.item.brand}</ProductBrand>

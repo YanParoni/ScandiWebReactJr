@@ -11,6 +11,7 @@ export const ModalContainer = styled.div`
   background-color: #fff;
   z-index: 7;
   padding: 8px 1.1vw 1.3vw 1.1vw;
+  height:600px
 `;
 
 export const ModalFooterContainer = styled.div`
@@ -40,6 +41,7 @@ export const ItemContainer = styled.div`
   &:hover #modal-item-name {
     text-decoration: underline;
   }
+  
 `;
 
 export const ButtonCommon = styled.button`
@@ -260,3 +262,8 @@ export const ProductPrice = styled.span`
   justify-content: flex-start;
   align-items: center;
 `;
+ export const Wrap = styled.div`
+ height: 540px;
+  overflow-y: auto;
+ 
+ `

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { connect } from "react-redux";
-import { TotalPriceContainer, TotalPriceTotal } from "./modal.styles";
+import { TotalPriceContainer, TotalPriceCost, TotalPriceTotal } from "./modal.styles";
 
 class TotalPrice extends PureComponent {
   constructor(props) {
@@ -19,12 +19,16 @@ class TotalPrice extends PureComponent {
     return (
       <TotalPriceContainer>
         {item !== undefined && item.item && (
+          <>
           <TotalPriceTotal>
             Total:{" "}
-            {`${getSymbolFromCurrency(
+          </TotalPriceTotal>
+          <TotalPriceCost>
+          {`${getSymbolFromCurrency(
               item.item.prices[currency].currency
             )}${totalPrice}`}
-          </TotalPriceTotal>
+          </TotalPriceCost>
+        </>
         )}
       </TotalPriceContainer>
     );

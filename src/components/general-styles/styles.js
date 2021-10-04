@@ -24,9 +24,9 @@ export const AttributeButton = styled.button`
     props.backgroundColor ? props.backgroundColor : ""};
   min-width: 63px;
   height: 45px;
+  border: 0.13em solid ${(props) => (props.active ? "green" : "#1D1F22")};
   font-size: 16px;
   line-height: 18px;
-  border: 1px solid #1D1F22;
   font-weight: 400;
   font-family: "Source Sans Pro", sans-serif;
   color: ${(props) =>

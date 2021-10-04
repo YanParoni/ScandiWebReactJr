@@ -21,7 +21,7 @@ class Currency extends Component {
   closeModal = () => {
     this.setState({ showModal: false });
     document.removeEventListener("click", this.closeModal);
-   };
+  };
 
   componentDidMount() {
     this.fetchCurrency();
@@ -32,7 +32,7 @@ class Currency extends Component {
     document.removeEventListener("click", this.closeModal);
   }
 
-  handleClick = e => {
+  handleClick = (e) => {
     if (this.state.showModal) {
       this.closeModal();
       return;
@@ -53,16 +53,12 @@ class Currency extends Component {
   render() {
     const { sendCurrency, selected } = this.props;
     return (
-      <CurrencySelect
-      
-        onClick={this.handleClick}
-        active={this.state.showOptions}
-      >
+      <CurrencySelect onClick={this.handleClick} active={this.state.showModal}>
         <span>
           {`${getSymbolFromCurrency(this.state.currencies[selected])}`}
           {this.state.showModal ? <UpArrow /> : <DownArrow />}
         </span>
-        <div id="options">
+        <div active={this.state.showModal} id="options">
           {this.state.showModal &&
             this.state.currencies.map((item, id) => (
               <span onClick={() => sendCurrency(id)} key={id}>

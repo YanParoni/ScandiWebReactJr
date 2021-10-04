@@ -19,7 +19,7 @@ import {
   AttributeGroupName,
   ItemNameLink,
   CartName,
-  ItemPrice,
+  ItemPrice,Wrap
 } from "./modal.styles";
 import {
   removeFromCart,
@@ -93,6 +93,7 @@ class CartModal extends PureComponent {
             &nbsp;
             <ItemCount>{totalItems} items</ItemCount>
           </div>
+          <Wrap>
           {cart !== undefined &&
             cart.map((item, id) => (
               <ItemContainer key={id}>
@@ -129,6 +130,7 @@ class CartModal extends PureComponent {
                 </ImageContainer>
               </ItemContainer>
             ))}
+            </Wrap>
           <TotalPrice totalPrice={Math.round(total * 100) / 100} />
 
           <FooterBtns closeModal={closeModal} />
